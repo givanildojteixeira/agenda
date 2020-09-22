@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+	<title>Painel Vendedor</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="./css/bootstrap-datetimepicker.min.css" media="screen" type="text/css">
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./css/bootstrap.min.css" media="screen">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<style>
+		.row.centro {
+			background-color: gainsboro;
+			height: 14vh;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="wrapper d-flex align-items-stretch">
+		<!-- barra lateral -->
+		<nav id="sidebar">
+			<div class="custom-menu">
+				<button type="button" id="sidebarCollapse" class="btn btn-primary">
+					<i class="fa fa-bars"></i>
+					<span class="sr-only">Menu</span>
+				</button>
+			</div>
+			<div class="p-3">
+				<h1><a href="index.html" class="logo">Guara <span>Concessionária Chevrolet</span></a></h1>
+				<ul class="list-unstyled components mb-5">
+					<li class="active"> <a href="index.html"><span class="fa fa-home mr-3"></span>Início</a> </li>
+					<li> <a href="#"><span class="fa fa-briefcase mr-3"></span>Painel</a> </li>
+					<li> <a href="#"><span class="fa fa-sticky-note mr-3"></span>Relatórios</a> </li>
+					<li> <a href="#"><span class="fa fa-suitcase mr-3"></span>Resgate</a> </li>
+					<li> <a href="#"><span class="fa fa-cogs mr-3"></span>Ajustes</a> </li>
+					<li> <a href="#"><span class="fa fa-user mr-3"></span>Sobre</a> </li>
+				</ul>
+
+				<div class="">
+					<h3 class="h6 mb-3">CRM - Guará Chevrolet</h3>
+				</div>
+
+				<div class="footer">
+					<p> Copyright &copy; <script>
+							document.write(new Date().getFullYear());
+						</script> Todos os direitos reservados
+					</p>
+				</div>
+			</div>
+		</nav>
+		<!-- Conteudo da Pagina  -->
+		<div class="container-fluid">
+			<!-- Cabeçalho -->
+			<div class="row">
+				<div class="col">
+					<div class="pos-f-t">
+						<div class="collapse" id="navbarToggleExternalContent">
+							<div class="bg-dark ">
+								<h4 class="text-white">Painel de atendimento</h4>
+								<span class="text-muted">Exposição dos horarios agendados pelos clientes para
+									atendimento</span>
+							</div>
+						</div>
+						<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+							<button class="navbar-toggler" type="button" data-toggle="collapse"
+								data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+								aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+								<h4 class="text-black">Painel de atendimento</h4>
+							</button>
+							<span> </span>
+							<div class="input-append date">
+								<div class="input-group date form_date  " data-date="" data-date-format="dd/mm/yyyy"
+									data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
+									<input id="database" class="form-control text-center font-weight-bold" size="16"
+										type="text" readonly>
+									<span class="input-group-addon p-6">
+										<span class="glyphicon glyphicon-calendar"> </span>
+									</span>
+									<button id='btaoatualizar' type="button" class="btn btn-success p-3"
+										onclick="DistribuiContatos()"></button>
+								</div>
+							</div>
+							<div>
+								<h4>Agenda do Vendedor</h4>
+							</div>
+
+						</nav>
+					</div>
+				</div>
+			</div>
+			<!-- Tabela de lançamentos  -->
+			<div class="row">
+				<div class="col">
+					<table id="my-table"
+						class="table table-sm table-responsive-sm table-bordered rounded text-center my-table ">
+						<thead>
+							<tr class="table-success">
+								<th scope="col">Vendedor</th>
+								<th scope="col">08:00</th>
+								<th scope="col">08:30</th>
+								<th scope="col">09:00</th>
+								<th scope="col">09:30</th>
+								<th scope="col">10:00</th>
+								<th scope="col">10:30</th>
+								<th scope="col">11:00</th>
+								<th scope="col">11:30</th>
+								<th scope="col">12:00</th>
+								<th scope="col">12:30</th>
+								<th scope="col">13:00</th>
+								<th scope="col">13:30</th>
+								<th scope="col">14:00</th>
+								<th scope="col">14:30</th>
+								<th scope="col">15:00</th>
+								<th scope="col">15:30</th>
+								<th scope="col">16:00</th>
+								<th scope="col">16:30</th>
+								<th scope="col">17:00</th>
+								<th scope="col">17:30</th>
+								<th scope="col">18:00</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="linha1">
+								<th id='v1c0' scope="row"></th>
+								<td onclick="myFunction(this)" id='v1c0800' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c0830' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c0900' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c0930' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1000' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1030' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1100' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1130' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1200' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1230' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1300' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1330' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1400' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1430' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1500' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1530' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1600' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1630' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1700' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1730' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v1c1800' scope="row"> </td>
+							</tr>
+							<tr id="linha2">
+								<th id='v2c0' scope="row"></th>
+								<td onclick="myFunction(this)" id='v2c0800' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c0830' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c0900' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c0930' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1000' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1030' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1100' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1130' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1200' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1230' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1300' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1330' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1400' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1430' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1500' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1530' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1600' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1630' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1700' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1730' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v2c1800' scope="row"> </td>
+							</tr>
+							<tr id="linha3">
+								<th id='v3c0' scope="row"></th>
+								<td onclick="myFunction(this)" id='v3c0800' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c0830' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c0900' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c0930' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1000' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1030' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1100' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1130' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1200' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1230' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1300' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1330' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1400' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1430' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1500' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1530' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1600' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1630' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1700' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1730' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v3c1800' scope="row"> </td>
+							</tr>
+							<tr id="linha4">
+								<th id='v4c0' scope="row"></th>
+								<td onclick="myFunction(this)" id='v4c0800' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c0830' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c0900' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c0930' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1000' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1030' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1100' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1130' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1200' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1230' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1300' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1330' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1400' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1430' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1500' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1530' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1600' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1630' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1700' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1730' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v4c1800' scope="row"> </td>
+							</tr>
+							<tr id="linha5">
+								<th id='v5c0' scope="row"></th>
+								<td onclick="myFunction(this)" id='v5c0800' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c0830' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c0900' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c0930' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1000' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1030' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1100' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1130' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1200' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1230' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1300' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1330' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1400' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1430' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1500' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1530' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1600' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1630' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1700' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1730' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v5c1800' scope="row"> </td>
+							</tr>
+							<tr id="linha6">
+								<th id='v6c0' scope="row"></th>
+								<td onclick="myFunction(this)" id='v6c0800' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c0830' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c0900' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c0930' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1000' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1030' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1100' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1130' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1200' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1230' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1300' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1330' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1400' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1430' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1500' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1530' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1600' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1630' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1700' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1730' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v6c1800' scope="row"> </td>
+							</tr>
+							<tr id="linha7">
+								<th id='v7c0' scope="row"></th>
+								<td onclick="myFunction(this)" id='v7c0800' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c0830' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c0900' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c0930' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1000' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1030' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1100' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1130' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1200' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1230' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1300' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1330' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1400' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1430' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1500' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1530' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1600' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1630' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1700' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1730' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v7c1800' scope="row"> </td>
+							</tr>
+							<tr id="linha8">
+								<th id='v8c0' scope="row"></th>
+								<td onclick="myFunction(this)" id='v8c0800' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c0830' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c0900' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c0930' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1000' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1030' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1100' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1130' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1200' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1230' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1300' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1330' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1400' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1430' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1500' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1530' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1600' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1630' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1700' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1730' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v8c1800' scope="row"> </td>
+							</tr>
+							<tr id="linha9">
+								<th id='v9c0' scope="row"></th>
+								<td onclick="myFunction(this)" id='v9c0800' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c0830' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c0900' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c0930' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1000' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1030' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1100' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1130' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1200' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1230' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1300' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1330' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1400' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1430' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1500' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1530' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1600' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1630' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1700' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1730' scope="row"> </td>
+								<td onclick="myFunction(this)" id='v9c1800' scope="row"> </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- Legenda e botões -->
+			<div class="col col-12">
+				<div class="row">
+					<!-- Legenda -->
+					<div class="col-6 sidenav my-legend">
+						<div class='legend-title'>Legenda Tipo de Atendimentos</div>
+						<div class="row">
+							<div class="col">
+								<div class='legend-scale'>
+									<ul class='legend-labels'>
+										<li><span class="cor1"></span>ATENDIMENTO</li>
+										<li><span class="cor2"></span>RETORNO</li>
+										<li><span class="cor3"></span>ENTREGA AGENDADA</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col">
+								<div class='legend-scale'>
+									<ul class='legend-labels'>
+										<li><span class="cor4"></span>ATENDIMENTO</li>
+										<li><span class="cor5"></span>RETORNO</li>
+										<li><span class="cor6"></span>ENTREGA AGENDADA</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col">
+								<div class='legend-scale'>
+									<ul class='legend-labels'>
+										<li><span class="cor7"></span>ATENDIMENTO </li>
+										<li><span class="cor8"></span>RETORNO</li>
+										<li><span class="cor9"></span>ENTREGA AGENDADA</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- botoes -->
+					<div class="col sidenav">
+						<div class="row centro align-items-center justify-content-center">
+							<div class="col">
+								<input class="btn btn-primary btn-block" type="button" value="Insere Agenda"
+									onclick="criacaoContato()">
+								<input class="btn btn-primary btn-block" type="button" value="Troca Vendedor"
+									onclick="trocavendedor()">
+							</div>
+							<div class="col">
+								<input class="btn btn-primary btn-block" type="button" value="Remove Agenda"
+									onclick="removeContato()">
+								<button type="button" class="btn btn-primary btn-block">Impressão</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p></p>
+			<!-- footer -->
+			<footer class="container-fluid rounded">
+				<div id="resp"></div>
+			</footer>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="./jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="./js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="./js/locales/bootstrap-datetimepicker.pt-BR.js" charset="UTF-8"> </script>
+	<script src="./js/popper.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./js/main.js"></script>
+	<script type="text/javascript">
+		$('.form_date').datetimepicker({
+			language: 'pt-BR',
+			weekStart: 1,
+			todayBtn: 1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0,
+		});
+		$('.form_date').datetimepicker("setDate", new Date());
+	</script>
+</body>
+
+</html>
