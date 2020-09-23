@@ -65,8 +65,7 @@ let removeContato = function () {
 	if (contatoSelecionado > 0) {
 		for (let c = 0; c < contatos.length; c++) {
 			if (contatoSelecionado == contatos[c].nrocontato) {
-				alert(contatos[c].cliente)
-				alert(contatos.splice(c, 1))
+				alert('Contato removido com sucesso!')
 			}
 		}
 		DistribuiContatos();
