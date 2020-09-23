@@ -180,6 +180,8 @@ function limpaAgenda() {
 
 })(jQuery);
 
+
+//configurações do calendario para fechar quando clicado, portugues, tamanho e forma
 $('.form_date').datetimepicker({
 	language: 'pt-BR',
 	weekStart: 1,
@@ -191,5 +193,8 @@ $('.form_date').datetimepicker({
 	forceParse: 0,
 });
 $('.form_date').datetimepicker("setDate", new Date());
+
+//atribuir o uso de document by 
 document.getElementById('btaoatualizar').innerHTML = 'Atualizar'
+//carregar a data corrente inicial
 dataCorrente = $('.form_date').datetimepicker("getDate").getDate() + "/" + ($('.form_date').datetimepicker("getDate").getMonth() + 1) + "/" + $('.form_date').datetimepicker("getDate").getFullYear()
