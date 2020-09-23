@@ -56,34 +56,35 @@
 		<!-- Conteudo da Pagina  -->
 		<div class="container-fluid">
 			<!-- Cabeçalho -->
-			<div class="row">
+			<div>
 				<div class="col">
 					<div class="pos-f-t">
 						<div class="collapse" id="navbarToggleExternalContent">
-							<div class="bg-dark ">
-								<h4 class="text-white">Painel de atendimento</h4>
+							<div class="bg-warning">
+								<h3 class="text-white">Painel de atendimento</h3>
 								<span class="text-muted">Exposição dos horarios agendados pelos clientes para
 									atendimento</span>
 							</div>
 						</div>
 						<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-							<button class="navbar-toggler" type="button" data-toggle="collapse"
+							<button class="navbar-light" type="button" data-toggle="collapse"
 								data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
 								aria-expanded="false" aria-label="Toggle navigation">
 								<span class="navbar-toggler-icon"></span>
-								<h4 class="text-black">Painel de atendimento</h4>
+								Painel de atendimento
 							</button>
-							<span> </span>
+
 							<div class="input-append date">
-								<div class="input-group date form_date  " data-date="" data-date-format="dd/mm/yyyy"
+								<div class="input-group date form_date" data-date-format="dd/mm/yyyy"
 									data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
-									<input id="database" class="form-control text-center font-weight-bold" size="16"
+									<input id="database" class="form-control text-center font-weight-bold" size="20"
 										type="text" readonly>
-									<span class="input-group-addon p-6">
+									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"> </span>
 									</span>
 									<button id='btaoatualizar' type="button" class="btn btn-success p-3"
-										onclick="DistribuiContatos()"></button>
+										onclick="DistribuiContatos()">
+									</button>
 								</div>
 							</div>
 							<div>
@@ -417,21 +418,7 @@
 		charset="UTF-8"> </script>
 	<script src="./assets/libraries/bootstrap/popper.js"></script>
 	<script src="./assets/libraries/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="./assets/resources/scripts/main.js">
-	</script>
-	<script type="text/javascript">
-		$('.form_date').datetimepicker({
-			language: 'pt-BR',
-			weekStart: 1,
-			todayBtn: 1,
-			autoclose: 1,
-			todayHighlight: 1,
-			startView: 2,
-			minView: 2,
-			forceParse: 0,
-		});
-		$('.form_date').datetimepicker("setDate", new Date());
-	</script>
+	<script type="text/javascript" src="./assets/resources/scripts/main.js"> </script>
 </body>
 
 </html>
