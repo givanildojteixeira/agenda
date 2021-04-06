@@ -17,7 +17,7 @@ function Contatos(vendedor, nrocontato, cliente, tipoAtendimento, horario, dataC
 	this.horario = horario;
 	this.dataContato = dataContato;
 }
-
+//****************************************************************************** */
 /* Função com nome
 Finalidade: Insere os vendedore do Array no painel até o limite de 9 vendedores
 */
@@ -34,7 +34,7 @@ function CarregaVendedores() {
 		}
 	}
 }
-
+//****************************************************************************** */
 /*Função com nome
 criando um contato usando prompt
 */
@@ -75,7 +75,7 @@ function criacaoContato() {
 		//contatos.push(new Contatos("Silvani", geraNroContato(), "Moises", 'Atendimento', "1200", dataCorrente));
 	}
 }
-
+//****************************************************************************** */
 /* Função com nome
 faz a busca nos contatos e posiciona no painel conforme a data, horario e vendedor
 */
@@ -93,7 +93,7 @@ function DistribuiContatos() {
 		}
 	}
 }
-
+//****************************************************************************** */
 /*Função anônima com argumento
 que recebe o numero do contato e faz a busta na lista para retornar os dados pre-definidos
 */
@@ -106,7 +106,7 @@ let leContatos = function (nrocont) {
 	}
 }
 
-
+//****************************************************************************** */
 /*Função anônima sem argumento
 Finalidade: remover contato que está no ponteiro e retornar uma mensagem
 */
@@ -125,7 +125,7 @@ let removeContato = function () {
 		alert('Não foi selecionado nenhum contato para remover!') //exibe uma mensagem
 	}
 }
-
+//****************************************************************************** */
 /* Função anonima com retorno
 finalidade: gerar um contador progressivo, retornando valor e armazenando o resultado na variável
 */
@@ -146,6 +146,7 @@ var myFunction = (x) => {
 	}
 }
 
+//****************************************************************************** */
 /*Função anonima sem argumento
 limpa toda a agenda de contatos, 
 usada para mudança de data ou recolocação dos contatos
@@ -175,6 +176,7 @@ function limpaAgenda() {
 		document.getElementById('v' + linha + 'c1800').innerHTML = "";
 	}
 }
+//****************************************************************************** */
 //Função auto executavel que esta vinculada ao painel lateral usado para menus  id="sidebar"
 (function () {
 
