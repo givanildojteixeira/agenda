@@ -12015,96 +12015,61 @@ a[data-toggle="collapse"] {
 .subscribe-form .form-control {
   background: #3b4ec6;
 }
-		/* Set gray background color and 100% height */
-		.sidenav {
-		  background-color: #f1f1f1;
-		  height: 100%;
-		  border: 1px solid #888;
-		  border-radius: 3px;
-		}
 
-		/* Set black background color, white text and some padding */
-		footer {
-		  background-color: #555;
-		  color: white;
-		  padding: 15px;
-		}
+/* Set gray background color and 100% height */
+.sidenav {
+  background-color: #f1f1f1;
+  height: 100%;
+  border: 1px solid #888;
+  border-radius: 3px;
+}
 
-		.my-legend .legend-title {
-		  text-align: left;
-		  margin-bottom: 5px;
-		  font-weight: bold;
-		  font-size: 90%;
-		}
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
 
-		.my-legend .legend-scale ul {
-		  margin: 0;
-		  margin-bottom: 5px;
-		  padding: 0;
-		  float: left;
-		  list-style: none;
-		}
+.my-legend .legend-title {
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 90%;
+}
 
-		.my-legend .legend-scale ul li {
-		  font-size: 80%;
-		  list-style: none;
-		  margin-left: 0;
-		  line-height: 18px;
-		  margin-bottom: 2px;
-		}
+.my-legend .legend-scale ul {
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 0;
+  float: left;
+  list-style: none;
+}
 
-		.my-legend ul.legend-labels li span {
-		  display: block;
-		  float: left;
-		  height: 16px;
-		  width: 30px;
-		  margin-right: 5px;
-		  margin-left: 0;
-		  border: 1px solid #999;
-		}
+.my-legend .legend-scale ul li {
+  font-size: 80%;
+  list-style: none;
+  margin-left: 0;
+  line-height: 18px;
+  margin-bottom: 2px;
+}
 
-		.my-legend .legend-source {
-		  font-size: 70%;
-		  color: #999;
-		  clear: both;
-		}
+.my-legend ul.legend-labels li span {
+  display: block;
+  float: left;
+  height: 16px;
+  width: 30px;
+  margin-right: 5px;
+  margin-left: 0;
+  border: 1px solid #999;
+}
 
-		.my-legend a {
-		  color: #777;
-		}
+.my-legend .legend-source {
+  font-size: 70%;
+  color: #999;
+  clear: both;
+}
 
-		.cor1 {
-		  background: brown;
-		}
-
-		.cor2 {
-		  background: rgb(20, 170, 7);
-		}
-
-		.cor3 {
-		  background: rgb(179, 164, 30);
-		}
-
-		.cor4 {
-		  background: rgb(179, 164, 30);
-		}
-
-		.cor5 {
-		  background: rgb(192, 10, 10);
-		}
-
-		.cor6 {
-		  background: rgb(17, 3, 107);
-		}
-
-		.cor7 {
-		  background: rgb(185, 124, 11);
-		}
-
-		.cor8 {
-		  background: orange;
-		}
-
-		.cor9 {
-		  background: purple;
-		}
+.my-legend a {
+  color: #777;
+}

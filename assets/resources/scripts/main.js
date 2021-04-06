@@ -4,8 +4,9 @@ Main
 let vendedor = ['Alexandre', 'Daniele', 'Fernando', 'Lidiane', 'Lucas', 'Orlei', 'Paulo', 'Silvani', 'José']
 let contatos = [];
 let nroContato = 1000
-let dataCorrente
+let dataCorrente = ""
 let contatoSelecionado = 0
+let tempoAtualizarAutomaticamente = 60
 
 //construtor
 function Contatos(vendedor, nrocontato, cliente, tipoAtendimento, horario, dataContato) {
@@ -44,13 +45,34 @@ function criacaoContato() {
 	if ((c == '') || (c == null)) return; //pressionou cancelar ou enter sem valor então sai
 	var h = prompt("Digite o Horario na agenda HHMM:");
 	if ((h == '') || (h == null)) return; //pressionou cancelar ou enter sem valor então sai
+	
+    //verifica falhas nas strings recebidas  - Validadores
+	v = v.trim();    //manipulação 1
+	if (v == ''){
+		alert('Nome do vendedor não pode ser = brancos')
+		return;
+	}
+	if (h.indexOf(':') > -1){ //manipulação 2
+			alert('Não coloque [:] em horario, este deve ser no formato HHMM apenas')
+		return;
+	}
+	if (c.length < 4) { //manipulação 3
+			alert('Nome do Cliente deve ter mais que 3 caracteres')
+		return;
+	}
+	h = h.replace(/[^0-9]/g,'');  //Manipulação 4 usando string template, extraindo somente numeros da variavel de hora
+	if (h.length != 4) {
+		alert('O Horario não esta no formato correto, favor colocar como HHMM')
+		return;	
+	}
+	//fim da validação!
 	if (confirm("Deseja inserir o contato?")) {
-		dataCorrente = $('.form_date').datetimepicker("getDate").getDate() + "/" + ($('.form_date').datetimepicker("getDate").getMonth() + 1) + "/" + $('.form_date').datetimepicker("getDate").getFullYear()
-		var contato = new Contatos(v, nroContato, c, 'Atendimento', h, dataCorrente);
-		nroContato++;
+		//dataCorrente = $('.form_date').datetimepicker("getDate").getDate() + "/" + ($('.form_date').datetimepicker("getDate").getMonth() + 1) + "/" + $('.form_date').datetimepicker("getDate").getFullYear()
+		var contato = new Contatos(v, geraNroContato(), c, 'Atendimento', h, dataCorrente);
 		contatos.push(contato);
 		DistribuiContatos();
 		alert("Contato Criado com sucesso!\nVendedor:" + contato.vendedor + "\nCliente: " + contato.cliente);
+		//contatos.push(new Contatos("Silvani", geraNroContato(), "Moises", 'Atendimento', "1200", dataCorrente));
 	}
 }
 
@@ -59,10 +81,15 @@ faz a busca nos contatos e posiciona no painel conforme a data, horario e vended
 */
 function DistribuiContatos() {
 	limpaAgenda(); //limpa agenda, para trabalhar com uma tabela zerada
+	dataCorrente = $('.form_date').datetimepicker("getDate").getDate() + "/" + ($('.form_date').datetimepicker("getDate").getMonth() + 1) + "/" + $('.form_date').datetimepicker("getDate").getFullYear()
 	for (let v = 0; v < vendedor.length; v++) { //para cada vendedor do painel,
 		for (let c = 0; c < contatos.length; c++) { //varre os contatos.
-			if ((vendedor[v] == contatos[c].vendedor) && (dataCorrente == contatos[c].dataContato)) //se for um contato do vendedor na data mostrada na tela, então
+			if ((vendedor[v] == contatos[c].vendedor) && (dataCorrente == contatos[c].dataContato)) {//se for um contato do vendedor na data mostrada na tela, então
 				document.getElementById('v' + (v + 1) + 'c' + contatos[c].horario).innerHTML = contatos[c].nrocontato; //coloca no local correto no painel
+				/*implantar que o sistema coloque a cor do quadro, conforme a cor da legenda para identificar
+				document.getElementById('v' + (v + 1) + 'c' + contatos[c].horario).style.backgroundColor = document.getElementById('Legc1').style.backgroundColor;
+				*/
+			}
 		}
 	}
 }
@@ -74,7 +101,7 @@ let leContatos = function (nrocont) {
 	for (let c = 0; c < contatos.length; c++) { //varre todos os contados
 		if (nrocont == contatos[c].nrocontato) { //quando localiza o contato pelo numero
 			contatoSelecionado = contatos[c].nrocontato //marca o contato na memória como ponteiro
-			return (contatos[c].nrocontato + " - " + contatos[c].cliente) + " - " + contatos[c].tipoAtendimento; //retorna informações para o painel
+			return ( "Dia:" + contatos[c].dataContato + " - Nro:" + contatos[c].nrocontato + " - Cliente:" + contatos[c].cliente) + " - Tipo:" + contatos[c].tipoAtendimento; //retorna informações para o painel
 		}
 	}
 }
@@ -99,24 +126,6 @@ let removeContato = function () {
 	}
 }
 
-/* Evento de carregamento do documento - onload
-Coloquei aqui o que quero que carregue no inicio 
-*/
-$(window).load(function () {
-
-	CarregaVendedores(); //coloca os vendedores no painel
-
-	//lançamento de contatos para testes e simulações
-	contatos.push(new Contatos("Alexandre", geraNroContato(), "Givanildo", 'Atendimento', "0800", dataCorrente));
-	contatos.push(new Contatos("Daniele", geraNroContato(), "Elisangela", 'Atendimento', "1030", dataCorrente));
-	contatos.push(new Contatos("Fernando", geraNroContato(), "Lucas", 'Atendimento', "1130", dataCorrente));
-	contatos.push(new Contatos("José", geraNroContato(), "Joao", 'Atendimento', "1530", dataCorrente));
-	contatos.push(new Contatos("Paulo", geraNroContato(), "Luiz", 'Atendimento', "1530", dataCorrente));
-	contatos.push(new Contatos("Silvani", geraNroContato(), "Moises", 'Atendimento', "1200", dataCorrente));
-
-	DistribuiContatos() //distribui os contatos criados no painel.
-});
-
 /* Função anonima com retorno
 finalidade: gerar um contador progressivo, retornando valor e armazenando o resultado na variável
 */
@@ -125,8 +134,9 @@ let geraNroContato = function () {
 }
 
 /* Função Flecha - Arrow Function
-quando o usuario pressionar um campo, deve executar essa função  que mostra o argumento no campo designado
-update para quando o campo estiver em branco, não deve mostrar nada
+quando o usuario pressionar um campo dentro do painel, deve executar essa função 
+que mostra o argumento no campo designado
+e para quando o campo estiver em branco, não deve mostrar nada
 */
 var myFunction = (x) => {
 	if (x.innerHTML != "") {
@@ -136,7 +146,10 @@ var myFunction = (x) => {
 	}
 }
 
-
+/*Função anonima sem argumento
+limpa toda a agenda de contatos, 
+usada para mudança de data ou recolocação dos contatos
+*/
 function limpaAgenda() {
 	for (let linha = 1; linha < 10; linha++) {
 		document.getElementById('v' + linha + 'c0800').innerHTML = '';
@@ -162,7 +175,7 @@ function limpaAgenda() {
 		document.getElementById('v' + linha + 'c1800').innerHTML = "";
 	}
 }
-//Função auto executavel
+//Função auto executavel que esta vinculada ao painel lateral usado para menus  id="sidebar"
 (function () {
 
 	var fullHeight = function () {
@@ -180,7 +193,7 @@ function limpaAgenda() {
 
 })(jQuery);
 
-
+//****************************************************************************** */
 //configurações do calendario para fechar quando clicado, portugues, tamanho e forma
 $('.form_date').datetimepicker({
 	language: 'pt-BR',
@@ -190,11 +203,112 @@ $('.form_date').datetimepicker({
 	todayHighlight: 1,
 	startView: 2,
 	minView: 2,
-	forceParse: 0,
+	forceParse: 0
 });
 $('.form_date').datetimepicker("setDate", new Date());
+ 
+$('.form_date').on("change", function (ev) {
+    DistribuiContatos() //distribui os contatos criados no painel.
+    });
 
-//atribuir o uso de document by 
-document.getElementById('btaoatualizar').innerHTML = 'Atualizar'
-//carregar a data corrente inicial
-dataCorrente = $('.form_date').datetimepicker("getDate").getDate() + "/" + ($('.form_date').datetimepicker("getDate").getMonth() + 1) + "/" + $('.form_date').datetimepicker("getDate").getFullYear()
+$('.form_date').click(function () {
+	DistribuiContatos() //distribui os contatos criados no painel.
+  });
+
+//carregar a data corrente inicial caso nao tenha sido carregada
+if (dataCorrente == "") {
+	dataCorrente = $('.form_date').datetimepicker("getDate").getDate() + "/" + ($('.form_date').datetimepicker("getDate").getMonth() + 1) + "/" + $('.form_date').datetimepicker("getDate").getFullYear()
+}
+
+
+//****************************************************************************** */
+/*função para atualizar automaticamente apos um determinado tempo
+usa setInterval para atualizar o cronometro a cada 1 segundo
+*/
+function AtualizarAutomaticamente() {
+	tempoAtualizarAutomaticamente = tempoAtualizarAutomaticamente - 1;
+	if (tempoAtualizarAutomaticamente == 0) {
+		tempoAtualizarAutomaticamente = 60;
+		DistribuiContatos(); //distribui os contatos criados no painel.
+	}
+    document.querySelector('.clock').textContent = "Proxima Atualização em: " + tempoAtualizarAutomaticamente + " segundos.";
+}
+AtualizarAutomaticamente();
+const createClock = setInterval(AtualizarAutomaticamente, 1000);
+
+
+//****************************************************************************** */
+/* usa o evento de mouse move em conjunto com getElementsByName para mostrar o que representa cada tipo de legenda
+a princípio soment mostrando o seu nome, mas é possivel fazer um case select para colocar
+instruções de como é cada atendimento, presencial ou nao */
+let legendas = document.getElementsByName("legend");   //carrega a variavel legendas como um array
+//usa queryselector para programar os eventos listener nas legendas, passando uma funçao como parâmetro
+document.querySelector("#Leg1").addEventListener("mousemove", function() {passouOMouse(0)});
+document.querySelector("#Leg2").addEventListener("mousemove", function() {passouOMouse(1)});
+document.querySelector("#Leg3").addEventListener("mousemove", function() {passouOMouse(2)});
+document.querySelector("#Leg4").addEventListener("mousemove", function() {passouOMouse(3)});
+document.querySelector("#Leg5").addEventListener("mousemove", function() {passouOMouse(4)});
+document.querySelector("#Leg6").addEventListener("mousemove", function() {passouOMouse(5)});
+document.querySelector("#Leg7").addEventListener("mousemove", function() {passouOMouse(6)});
+document.querySelector("#Leg8").addEventListener("mousemove", function() {passouOMouse(7)});
+document.querySelector("#Leg9").addEventListener("mousemove", function() {passouOMouse(8) });
+
+function passouOMouse(n) {
+	//Imprimir alguma propriedade do objeto event recebido como parâmetro
+	document.getElementById('resp').innerHTML = (legendas[n].innerText)	
+}
+
+//****************************************************************************** */
+/* Evento getElementsByTagName que seta em array o que encontrar como tag h4
+pedi para colocar o titulo em substituição ao campo arrya 0
+*/
+let CabecalhoAgenda = document.getElementsByTagName('h4');
+CabecalhoAgenda[0].innerText = document.title;
+
+//****************************************************************************** */
+/* Evento de carregamento do documento - onload
+Coloquei aqui o que quero que carregue no inicio 
+para facilitar os testes
+*/
+$(window).load(function () {
+
+	CarregaVendedores(); //coloca os vendedores no painel
+
+	//lançamento de contatos para testes e simulações
+	contatos.push(new Contatos("Alexandre", geraNroContato(), "Givanildo", 'Atendimento', "0800", dataCorrente));
+	contatos.push(new Contatos("Daniele", geraNroContato(), "Elisangela", 'Atendimento', "1030", dataCorrente));
+	contatos.push(new Contatos("Fernando", geraNroContato(), "Lucas", 'Atendimento', "1130", dataCorrente));
+	contatos.push(new Contatos("José", geraNroContato(), "Joao", 'Atendimento', "1530", dataCorrente));
+	contatos.push(new Contatos("Paulo", geraNroContato(), "Luiz", 'Atendimento', "1530", dataCorrente));
+	contatos.push(new Contatos("Silvani", geraNroContato(), "Moises", 'Atendimento', "1200", dataCorrente));
+
+	DistribuiContatos() //distribui os contatos criados no painel.
+	setInterval(horario, 1000);  //mostra o horário no foot da tela
+});
+
+//função que controi o horário Longo
+function horario() {
+
+  var relogio = document.querySelector("#relogio");
+  var d = new Date();
+  var seg = d.getSeconds();
+  var min = d.getMinutes();
+  var hr = d.getHours();
+  var dia = d.getDate();
+  var mes = d.getMonth();
+  var meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+  var diaSem = d.getDay();
+  var diasSemana = ["Domingo","Segunda-Feira","Terça-Feira","Quarta-Feira","Quinta-Feira","Sexta-Feira","Sábado"];
+		relogio.innerHTML = diasSemana[diaSem] + ", " + dia + " de " + meses[mes] + ", " + hr + ":" + min + ":" + seg;
+}
+
+//****************************************************************************** */
+// Evento de teclado com o uso de keyCode
+document.addEventListener("keydown", teclaPressionada);
+function teclaPressionada(event) {
+     if(event.which==119){
+        criacaoContato()
+    } else if (event.which==120) {
+        removeContato()
+    }
+}

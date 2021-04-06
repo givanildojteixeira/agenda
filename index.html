@@ -5,6 +5,7 @@
 	<title>Painel Vendedor</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="./assets/css/style.css">
 	<link rel="stylesheet" href="./assets/libraries/bootstrap/css/bootstrap-datetimepicker.min.css" media="screen"
 		type="text/css">
 	<link rel="stylesheet" href="./assets/libraries/bootstrap/css/style.css">
@@ -31,7 +32,7 @@
 				</button>
 			</div>
 			<div class="p-3">
-				<h1><a href="index.html" class="logo">Guara <span>Concessionária Chevrolet</span></a></h1>
+				<h1><a href="index.html" class="logo">Minha Empresa <span>Painel Atendimento</span></a></h1>
 				<ul class="list-unstyled components mb-5">
 					<li class="active"> <a href="index.html"><span class="fa fa-home mr-3"></span>Início</a> </li>
 					<li> <a href="#"><span class="fa fa-briefcase mr-3"></span>Painel</a> </li>
@@ -42,7 +43,7 @@
 				</ul>
 
 				<div class="">
-					<h3 class="h6 mb-3">CRM - Guará Chevrolet</h3>
+					<h3 class="h6 mb-3">CRM - Central de Relacionamento</h3>
 				</div>
 
 				<div class="footer">
@@ -63,6 +64,7 @@
 							<div class="bg-warning">
 								<h3 class="text-white">Painel de atendimento</h3>
 								<span class="text-muted">Exposição dos horarios agendados pelos clientes para
+									atendimento, usanda a legenda de cores como nomenclatura da forma de
 									atendimento</span>
 							</div>
 						</div>
@@ -84,11 +86,13 @@
 									</span>
 									<button id='btaoatualizar' type="button" class="btn btn-success p-3"
 										onclick="DistribuiContatos()">
+										Atualizar
 									</button>
 								</div>
 							</div>
 							<div>
 								<h4>Agenda do Vendedor</h4>
+								<p class="clock"></p>
 							</div>
 
 						</nav>
@@ -358,27 +362,34 @@
 							<div class="col">
 								<div class='legend-scale'>
 									<ul class='legend-labels'>
-										<li><span class="cor1"></span>ATENDIMENTO</li>
-										<li><span class="cor2"></span>RETORNO</li>
-										<li><span class="cor3"></span>ENTREGA AGENDADA</li>
+										<li id='Leg1' name="legend"><span class="cor1" id='Legc1'></span>ATENDIMENTO
+											AGENDA</li>
+										<li id='Leg2' name="legend"><span class="cor2" id='Legc2'></span>TELEFONE</li>
+										<li id='Leg3' name="legend"><span class="cor3" id='Legc3'></span>BLOQUEIO</li>
 									</ul>
 								</div>
 							</div>
 							<div class="col">
 								<div class='legend-scale'>
 									<ul class='legend-labels'>
-										<li><span class="cor4"></span>ATENDIMENTO</li>
-										<li><span class="cor5"></span>RETORNO</li>
-										<li><span class="cor6"></span>ENTREGA AGENDADA</li>
+										<li id='Leg4' name="legend"><span class="cor4" id='Legc4'></span>ATENDIMENTO
+											PRIORIT.</li>
+										<li id='Leg5' name="legend"><span class="cor5" id='Legc5'></span>RETORNO CLIENTE
+										</li>
+										<li id='Leg6' name="legend"><span class="cor6" id='Legc6'></span>CURSO
+											TREINAMENTO</li>
 									</ul>
 								</div>
 							</div>
 							<div class="col">
 								<div class='legend-scale'>
 									<ul class='legend-labels'>
-										<li><span class="cor7"></span>ATENDIMENTO </li>
-										<li><span class="cor8"></span>RETORNO</li>
-										<li><span class="cor9"></span>ENTREGA AGENDADA</li>
+										<li id='Leg7' name="legend"><span class="cor7" id='Legc7'></span>ATENDIMENTO
+											PASSANTE </li>
+										<li id='Leg8' name="legend"><span class="cor8" id='Legc8'></span>RETORNO POR
+											CHAMADA</li>
+										<li id='Leg9' name="legend"><span class="cor9" id='Legc9'></span>FÉRIAS/DISPENSA
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -389,15 +400,19 @@
 					<div class="col sidenav">
 						<div class="row centro align-items-center justify-content-center">
 							<div class="col">
-								<input class="btn btn-primary btn-block" type="button" value="Insere Agenda"
+								<input class="btn btn-primary btn-block" type="button" value="F8 - Insere Agenda"
+									data-toggle="tooltip" data-placement="top" title="Insere novos contatos na Agenda"
 									onclick="criacaoContato()">
 								<input class="btn btn-primary btn-block" type="button" value="Troca Vendedor"
+									data-toggle="tooltip" data-placement="top" title="Troca de Vendedor Agenda"
 									onclick="trocavendedor()">
 							</div>
 							<div class="col">
-								<input class="btn btn-primary btn-block" type="button" value="Remove Agenda"
+								<input class="btn btn-primary btn-block" type="button" value="F9 - Remove Agenda"
+									data-toggle="tooltip" data-placement="top" title="Remove Contato na Agenda"
 									onclick="removeContato()">
-								<button type="button" class="btn btn-primary btn-block">Impressão</button>
+								<button type="button" class="btn btn-primary btn-block" data-toggle="tooltip"
+									data-placement="top" title="Imprime tela">Impressão</button>
 							</div>
 						</div>
 					</div>
@@ -406,7 +421,14 @@
 			<p></p>
 			<!-- footer -->
 			<footer class="container-fluid rounded">
-				<div id="resp"></div>
+				<div class="row">
+					<div class="col-9">
+						<div id="resp"></div>
+					</div>
+					<div class="col-3">
+						<div id="relogio"></div>
+					</div>
+				</div>
 			</footer>
 		</div>
 	</div>
