@@ -68,14 +68,13 @@ function criacaoContato() {
 	}
 	//fim da validação!
 	if (confirm("Deseja inserir o contato?")) {
-		//dataCorrente = $('.form_date').datetimepicker("getDate").getDate() + "/" + ($('.form_date').datetimepicker("getDate").getMonth() + 1) + "/" + $('.form_date').datetimepicker("getDate").getFullYear()
 		var contato = new Contatos(v, geraNroContato(), c, 'Atendimento', h, dataCorrente);
 		contatos.push(contato);    //insere o contato
 		DistribuiContatos();     //distribui na tela
 		//inseri o setTime, para que o Distribuidor dos contatos, possa inserir o contato sem sem perturbado pelo comfirm
-		setTimeout(function () {       //em 3 segundos ira avisar que a carga foi executada e fecha o sidebar
+		setTimeout(function () {       //em segundos ira avisar que a carga foi executada e fecha o sidebar
 		confirm("Contato Criado com sucesso!\nVendedor:" + contato.vendedor + "\nCliente: " + contato.cliente);
-	}, 100);  //mensagem com delay de 3s
+	}, 100);  //mensagem com delay
 	}
 }
 //****************************************************************************** */
@@ -132,8 +131,8 @@ let removeContato = function () {
 		for (let c = 0; c < contatos.length; c++) { //lê todos os contatos
 			if (contatoSelecionado == contatos[c].nrocontato) { //quando encontrar
 				contatos.splice(c, 1) //remove
-				confirm('Contato removido com sucesso!') //avisa que removeu
 				DistribuiContatos(); //como alterou a array então remove e realoca no painel
+				confirm('Contato removido com sucesso!') //avisa que removeu
 				return true; //sai
 			}
 		}
@@ -233,6 +232,7 @@ if (dataCorrente == "") {
 /*função para atualizar automaticamente apos um determinado tempo
 usa setInterval para atualizar o cronometro a cada 1 segundo
 */
+const createClock = setInterval(AtualizarAutomaticamente, 1000);
 function AtualizarAutomaticamente() {
 	tempoAtualizarAutomaticamente = tempoAtualizarAutomaticamente - 1;
 	if (tempoAtualizarAutomaticamente == 0) {
@@ -241,13 +241,6 @@ function AtualizarAutomaticamente() {
 	}
     document.querySelector('.clock').textContent = "Proxima Atualização em: " + tempoAtualizarAutomaticamente + " segundos.";
 }
-
-let atrazoNoProcesso = setTimeout(AtualizarAutomaticamente(), 50000);
-
-if (atrazoNoProcesso != '') {
-	const createClock = setInterval(AtualizarAutomaticamente, 1000);
-}
-
 
 //****************************************************************************** */
 /* usa o evento de mouse move em conjunto com getElementsByName para mostrar o que representa cada tipo de legenda
@@ -298,22 +291,6 @@ var btaoDidatico = document.getElementById('btCargaInicialDidatica');
     CargaInicialDidatica();
 }
 
-function CargaInicialDidatica() {
-		//lançamento de contatos para testes e simulações
-	contatos.push(new Contatos("Alexandre", geraNroContato(), "Givanildo", 'Atendimento', "0800", dataCorrente));
-	contatos.push(new Contatos("Daniele", geraNroContato(), "Elisangela", 'Atendimento', "1030", dataCorrente));
-	contatos.push(new Contatos("Fernando", geraNroContato(), "Lucas", 'Atendimento', "1130", dataCorrente));
-	contatos.push(new Contatos("José", geraNroContato(), "Joao", 'Atendimento', "1530", dataCorrente));
-	contatos.push(new Contatos("Paulo", geraNroContato(), "Luiz", 'Atendimento', "1530", dataCorrente));
-	contatos.push(new Contatos("Silvani", geraNroContato(), "Moises", 'Atendimento', "1200", dataCorrente));
-
-	DistribuiContatos() //distribui os contatos criados no painel.
-	setTimeout(function () {       //em 1 segundos ira avisar que a carga foi executada e fecha o sidebar
-		alert("Carga Inicial Executada");
-		$('#sidebar').toggleClass('active');
-	}, 100);  //mensagem com delay pois aguarda o prenchimento da tela
-}
-
 //função que controi o horário Longo
 function horario() {
 
@@ -340,3 +317,21 @@ function teclaPressionada(event) {
         removeContato()
     }
 }
+
+function CargaInicialDidatica() {
+		//lançamento de contatos para testes e simulações
+	contatos.push(new Contatos("Alexandre", geraNroContato(), "Givanildo", 'Atendimento', "0800", dataCorrente));
+	contatos.push(new Contatos("Daniele", geraNroContato(), "Elisangela", 'Atendimento', "1030", dataCorrente));
+	contatos.push(new Contatos("Fernando", geraNroContato(), "Lucas", 'Atendimento', "1130", dataCorrente));
+	contatos.push(new Contatos("José", geraNroContato(), "Joao", 'Atendimento', "1530", dataCorrente));
+	contatos.push(new Contatos("Paulo", geraNroContato(), "Luiz", 'Atendimento', "1530", dataCorrente));
+	contatos.push(new Contatos("Silvani", geraNroContato(), "Moises", 'Atendimento', "1200", dataCorrente));
+
+	DistribuiContatos() //distribui os contatos criados no painel.
+	setTimeout(function () {       //em 1 segundos ira avisar que a carga foi executada e fecha o sidebar
+		alert("Carga Inicial Executada");
+		$('#sidebar').toggleClass('active');
+	}, 100);  //mensagem com delay pois aguarda o prenchimento da tela
+}
+
+
