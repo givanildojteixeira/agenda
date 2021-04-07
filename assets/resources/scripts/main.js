@@ -8,6 +8,7 @@ let dataCorrente = ""
 let contatoSelecionado = 0
 let tempoAtualizarAutomaticamente = 60
 
+
 //construtor
 function Contatos(vendedor, nrocontato, cliente, tipoAtendimento, horario, dataContato) {
 	this.vendedor = vendedor;
@@ -69,10 +70,12 @@ function criacaoContato() {
 	if (confirm("Deseja inserir o contato?")) {
 		//dataCorrente = $('.form_date').datetimepicker("getDate").getDate() + "/" + ($('.form_date').datetimepicker("getDate").getMonth() + 1) + "/" + $('.form_date').datetimepicker("getDate").getFullYear()
 		var contato = new Contatos(v, geraNroContato(), c, 'Atendimento', h, dataCorrente);
-		contatos.push(contato);
-		DistribuiContatos();
-		alert("Contato Criado com sucesso!\nVendedor:" + contato.vendedor + "\nCliente: " + contato.cliente);
-		//contatos.push(new Contatos("Silvani", geraNroContato(), "Moises", 'Atendimento', "1200", dataCorrente));
+		contatos.push(contato);    //insere o contato
+		DistribuiContatos();     //distribui na tela
+		//inseri o setTime, para que o Distribuidor dos contatos, possa inserir o contato sem sem perturbado pelo comfirm
+		setTimeout(function () {       //em 3 segundos ira avisar que a carga foi executada e fecha o sidebar
+		confirm("Contato Criado com sucesso!\nVendedor:" + contato.vendedor + "\nCliente: " + contato.cliente);
+	}, 100);  //mensagem com delay de 3s
 	}
 }
 //****************************************************************************** */
@@ -84,7 +87,8 @@ function DistribuiContatos() {
 	dataCorrente = $('.form_date').datetimepicker("getDate").getDate() + "/" + ($('.form_date').datetimepicker("getDate").getMonth() + 1) + "/" + $('.form_date').datetimepicker("getDate").getFullYear()
 	for (let v = 0; v < vendedor.length; v++) { //para cada vendedor do painel,
 		for (let c = 0; c < contatos.length; c++) { //varre os contatos.
-			if ((vendedor[v] == contatos[c].vendedor) && (dataCorrente == contatos[c].dataContato)) {//se for um contato do vendedor na data mostrada na tela, então
+			//inserido toUpperCase() no tratamento da String para desconsiderar problemas com comparação da String
+			if ((vendedor[v].toUpperCase() == contatos[c].vendedor.toUpperCase()) && (dataCorrente == contatos[c].dataContato)) {//se for um contato do vendedor na data mostrada na tela, então
 				document.getElementById('v' + (v + 1) + 'c' + contatos[c].horario).innerHTML = contatos[c].nrocontato; //coloca no local correto no painel
 				/*implantar que o sistema coloque a cor do quadro, conforme a cor da legenda para identificar
 				document.getElementById('v' + (v + 1) + 'c' + contatos[c].horario).style.backgroundColor = document.getElementById('Legc1').style.backgroundColor;
@@ -93,6 +97,19 @@ function DistribuiContatos() {
 		}
 	}
 }
+/* Função Flecha - Arrow Function
+quando o usuario pressionar um campo dentro do painel, deve executar essa função 
+que mostra o argumento no campo designado
+e para quando o campo estiver em branco, não deve mostrar nada
+*/
+var myFunction = (x) => {
+	if (x.innerHTML != "") {
+		document.getElementById('resp').innerHTML = 'Você selecionou o contato:<strong>' + leContatos(x.innerHTML) + '</strong>';
+	} else {
+		document.getElementById('resp').innerHTML = '';
+	}
+}
+
 //****************************************************************************** */
 /*Função anônima com argumento
 que recebe o numero do contato e faz a busta na lista para retornar os dados pre-definidos
@@ -115,7 +132,7 @@ let removeContato = function () {
 		for (let c = 0; c < contatos.length; c++) { //lê todos os contatos
 			if (contatoSelecionado == contatos[c].nrocontato) { //quando encontrar
 				contatos.splice(c, 1) //remove
-				alert('Contato removido com sucesso!') //avisa que removeu
+				confirm('Contato removido com sucesso!') //avisa que removeu
 				DistribuiContatos(); //como alterou a array então remove e realoca no painel
 				return true; //sai
 			}
@@ -133,18 +150,7 @@ let geraNroContato = function () {
 	return nroContato++; //acrescenta 
 }
 
-/* Função Flecha - Arrow Function
-quando o usuario pressionar um campo dentro do painel, deve executar essa função 
-que mostra o argumento no campo designado
-e para quando o campo estiver em branco, não deve mostrar nada
-*/
-var myFunction = (x) => {
-	if (x.innerHTML != "") {
-		document.getElementById('resp').innerHTML = 'Você selecionou o contato:<strong>' + leContatos(x.innerHTML) + '</strong>';
-	} else {
-		document.getElementById('resp').innerHTML = '';
-	}
-}
+
 
 //****************************************************************************** */
 /*Função anonima sem argumento
@@ -235,8 +241,12 @@ function AtualizarAutomaticamente() {
 	}
     document.querySelector('.clock').textContent = "Proxima Atualização em: " + tempoAtualizarAutomaticamente + " segundos.";
 }
-AtualizarAutomaticamente();
-const createClock = setInterval(AtualizarAutomaticamente, 1000);
+
+let atrazoNoProcesso = setTimeout(AtualizarAutomaticamente(), 50000);
+
+if (atrazoNoProcesso != '') {
+	const createClock = setInterval(AtualizarAutomaticamente, 1000);
+}
 
 
 //****************************************************************************** */
@@ -275,8 +285,11 @@ para facilitar os testes
 $(window).load(function () {
 
 	CarregaVendedores(); //coloca os vendedores no painel
+	setInterval(horario, 1000);  //mostra o horário no foot da tela
+});
 
-	//lançamento de contatos para testes e simulações
+function CargaInicialDidatica() {
+		//lançamento de contatos para testes e simulações
 	contatos.push(new Contatos("Alexandre", geraNroContato(), "Givanildo", 'Atendimento', "0800", dataCorrente));
 	contatos.push(new Contatos("Daniele", geraNroContato(), "Elisangela", 'Atendimento', "1030", dataCorrente));
 	contatos.push(new Contatos("Fernando", geraNroContato(), "Lucas", 'Atendimento', "1130", dataCorrente));
@@ -285,8 +298,11 @@ $(window).load(function () {
 	contatos.push(new Contatos("Silvani", geraNroContato(), "Moises", 'Atendimento', "1200", dataCorrente));
 
 	DistribuiContatos() //distribui os contatos criados no painel.
-	setInterval(horario, 1000);  //mostra o horário no foot da tela
-});
+	setTimeout(function () {       //em 1 segundos ira avisar que a carga foi executada e fecha o sidebar
+		alert("Carga Inicial Executada");
+		$('#sidebar').toggleClass('active');
+	}, 100);  //mensagem com delay pois aguarda o prenchimento da tela
+}
 
 //função que controi o horário Longo
 function horario() {
@@ -308,9 +324,9 @@ function horario() {
 // Evento de teclado com o uso de keyCode
 document.addEventListener("keydown", teclaPressionada);
 function teclaPressionada(event) {
-     if(event.which==119){
+     if(event.which==119){   //tecla F8
         criacaoContato()
-    } else if (event.which==120) {
+    } else if (event.which==120) {    //tecla F9
         removeContato()
     }
 }
