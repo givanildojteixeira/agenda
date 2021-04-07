@@ -288,6 +288,16 @@ $(window).load(function () {
 	setInterval(horario, 1000);  //mostra o horário no foot da tela
 });
 
+/*
+Trabalhando com eventos no JavaScript
+Tratando Eventos (de navegadores)
+Evento Inline
+*/
+var btaoDidatico = document.getElementById('btCargaInicialDidatica');
+	btaoDidatico.onclick = function (){
+    CargaInicialDidatica();
+}
+
 function CargaInicialDidatica() {
 		//lançamento de contatos para testes e simulações
 	contatos.push(new Contatos("Alexandre", geraNroContato(), "Givanildo", 'Atendimento', "0800", dataCorrente));
