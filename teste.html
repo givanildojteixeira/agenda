@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        salvarPessoa();
+
+        function salvarPessoa() {
+
+            var arrayPessoas = []
+            if (JSON.parse(localStorage.getItem("pessoas")) != null) {
+                arrayPessoas.push(JSON.parse(localStorage.getItem("pessoas")));
+                console.log(arrayPessoas)
+                alert("existe");
+                return;
+            }
+            var nome = "Givanildo";
+            var cpf = "020.421.219-75";
+            var idade = 42;
+            var telefone = "42 9 9127 2061";
+            var email = "giva@guara.com";
+            var senha = "password";
+
+            var pessoa = {
+                nome: nome,
+                cpf: cpf,
+                idade: idade,
+                telefone: telefone,
+                email: email,
+                senha: senha
+            };
+            console.log(pessoa);
+            arrayPessoas.push(pessoa);
+            var pessoaJson = JSON.stringify(arrayPessoas);
+            localStorage.setItem("pessoas", pessoaJson);
+
+            alert("Salvo com Sucesso");
+        }
+    </script>
+</body>
+
+</html>

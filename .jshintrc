@@ -10,7 +10,7 @@
   "latedef": false,
   "maxlen": 150,
   "newcap": true,
-  "quotmark": "single",
+  "quotmark": "single", 
   "strict": true,
   "undef": true,
   "unused": true,

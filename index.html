@@ -359,6 +359,8 @@
 
 			<!-- Legenda e botões -->
 			<div class="col col-12">
+				<!--//colocar um div legenda para poder puxar os eventos
+			   objeto event[pesquisar] + target -->
 				<div class="row">
 					<!-- Legenda -->
 					<div class="col-6 sidenav my-legend">
@@ -367,8 +369,7 @@
 							<div class="col">
 								<div class='legend-scale'>
 									<ul class='legend-labels'>
-										<li id='Leg1' name="legend"><span class="atend1" id='Legc1'
-												style="background-color: rgb(15, 15, 15);"></span>ATENDIMENTO
+										<li id='Leg1' name="legend"><span class="atend1" id='Legc1'></span>ATENDIMENTO
 											AGENDA</li>
 										<li id='Leg2' name="legend"><span class="atend2" id='Legc2'></span>TELEFONE</li>
 										<li id='Leg3' name="legend"><span class="atend3" id='Legc3'></span>BLOQUEIO</li>
@@ -380,8 +381,9 @@
 									<ul class='legend-labels'>
 										<li id='Leg4' name="legend"><span class="atend4" id='Legc4'></span>ATENDIMENTO
 											PRIORIT.</li>
-										<li id='Leg5' name="legend"><span class="atend5" id='Legc5'></span>RETORNO
-											CLIENTE
+										<li id='Leg5' name="legend">
+											<span class="atend5" id='Legc5'></span>
+											RETORNO CLIENTE
 										</li>
 										<li id='Leg6' name="legend"><span class="atend6" id='Legc6'></span>CURSO
 											TREINAMENTO</li>
@@ -450,6 +452,8 @@
 	<script src="./assets/libraries/bootstrap/popper.js"></script>
 	<script src="./assets/libraries/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./assets/resources/scripts/main.js"> </script>
+	<script type="text/javascript" src="./assets/resources/scripts/ferramentas.js"> </script>
+	<script type="text/javascript" src="./assets/resources/scripts/database.js"> </script>
 </body>
 
 </html>

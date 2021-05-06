@@ -1,5 +1,5 @@
 /*
-Main
+Main   - local storage para armazenar os dados
 */
 
 'use strict';
@@ -8,133 +8,38 @@ correções necessárias de lint
 inclusao de 'use strict' para evitar problemas com o codigo nos navegadores, obrigando o programador a tratar
 os erros em tempo de programação
 */
-
-let vendedor = ['Alexandre', 'Daniele', 'Fernando'];
 let contatos = [];
+let vendedor = [];
 let nroContato = 1000;
 let dataCorrente = '';
 let contatoSelecionado = 0;
 let tempoAtualizarAutomaticamente = 60;
-let legendas = document.getElementsByName('legend');   //carrega a variavel legendas como um array
+let legendas = document.getElementsByName('legend'); //carrega a variavel legendas como um array
 
 //construtor
 function Contatos(vendedor, nrocontato, cliente, tipoAtendimento, horario, dataContato) {
 	this.vendedor = vendedor;
-	this.nrocontato = nrocontato;
+	this.nrocontato = nrocontato++;
 	this.cliente = cliente;
 	this.tipoAtendimento = tipoAtendimento;
 	this.horario = horario;
 	this.dataContato = dataContato;
 }
-//****************************************************************************** */
-/* Função com nome
-Finalidade: Insere os vendedore do Array no painel até o limite de 9 vendedores
-*/
-function CarregaVendedores() {
-	vendedor.push('Lidiane', 'Lucas', 'Orlei', 'Paulo', 'Silvani', 'José');
-	vendedor.sort(); //organiza em ordem alfabética a lista de vendedores
-	for (let i = 1; i < vendedor.length + 1; i++) { //varre a array ja ordenada
-		document.getElementById('v' + i + 'c0').innerHTML = (vendedor[i - 1]); //insere no painel
-	}
-
-	for (let i = 1; i <= 9; i++) { //varre as 9 linhas possiveis de vendedores
-		var linhaVendedor = document.getElementById('v' + i + 'c0'); //coleta o se conteudo e 
-		if (linhaVendedor.innerHTML === '') { //se estiver limpa
-			document.getElementById('linha' + i).style.display = 'none'; //oculta a linha
-		}
-	}
-}
-//****************************************************************************** */
-/*Função com nome
-criando um contato usando prompt
-*/
-function criacaoContato() {
-	let v = window.prompt('Digite o Nome do vendedor:'); //solicita o nome do vendedor
-	if ((v === '') || (v == null)) return; //pressionou cancelar ou enter sem valor então sai
-	let c = window.prompt('Digite o Nome do cliente:');
-	if ((c === '') || (c == null)) return; //pressionou cancelar ou enter sem valor então sai
-	let h = window.prompt('Digite o Horario na agenda HHMM:');
-	if ((h === '') || (h == null)) return; //pressionou cancelar ou enter sem valor então sai
 
 
-    //verifica falhas nas strings recebidas  - Validadores
-	v = v.trim();    //manipulação 1
-	if (v === ''){
-		window.alert('Nome do vendedor não pode ser = brancos');
-		return;
-	}
-	if (h.indexOf(':') > -1){ //manipulação 2
-		window.alert('Não coloque [:] em horario, este deve ser no formato HHMM apenas');
-		return;
-	}
-	if (c.length < 4) { //manipulação 3
-		window.alert('Nome do Cliente deve ter mais que 3 caracteres');
-		return;
-	}
-	//Manipulação 4 usando string template, extraindo somente numeros da variavel de hora
-	h = h.replace(/[^0-9]/g,'');  
-	if (h.length !== 4) {
-		window.alert('O Horario não esta no formato correto, favor colocar como HHMM');
-		return;	
-	}
-	//fim da validação!
-	if (window.confirm('Deseja inserir o contato?')) {
-		var contato = new Contatos(v, geraNroContato(), c, 'Atendimento', h, dataCorrente);
-		contatos.push(contato);    //insere o contato
-		new DistribuiContatos();     //distribui na tela
-		//inseri o setTime, para que o Distribuidor dos contatos, possa inserir o contato 
-		//sem sem perturbado pelo comfirm
-		setTimeout(function () {   //em segundos ira avisar que a carga foi executada e fecha o sidebar
-		window.confirm('Contato Criado com sucesso!\nVendedor:' + contato.vendedor + '\nCliente: ' + contato.cliente);
-	}, 100);  //mensagem com delay
-	}
-	/*
-	correções necessárias de lint
-	inclusao de window. antes de confirm, alert ou promp para não gerar erro w117 [x is not defined]
-	*/
-}
-
-//****************************************************************************** */
-/* Função com nome
-faz a busca nos contatos e posiciona no painel conforme a data, horario e vendedor
-*/
-function DistribuiContatos() {
-	limpaAgenda(); //limpa agenda, para trabalhar com uma tabela zerada
-	let calend = $('.form_date').datetimepicker('getDate');
-	dataCorrente = calend.getDate() + '/' + (calend.getMonth() + 1) + '/' + calend.getFullYear();
-	for (let v = 0; v < vendedor.length; v++) { //para cada vendedor do painel,
-		for (let c = 0; c < contatos.length; c++) { //varre os contatos.
-			//inserido toUpperCase() no tratamento da String para desconsiderar problemas com comparação da String
-			if ((vendedor[v].toUpperCase() === contatos[c].vendedor.toUpperCase()) && (dataCorrente === contatos[c].dataContato)) {
-				//se for um contato do vendedor na data mostrada na tela, então
-				let localContato = document.getElementById('v' + (v + 1) + 'c' + contatos[c].horario);
-					localContato.innerHTML = contatos[c].nrocontato;
-				//coloca no local correto no painel
-				//implantar que o sistema coloque a cor do quadro, conforme a cor da legenda para identificar
-				
-				//localContato.style.backgroundColor = document.getElementById('Leg1').style.backgroundColor;
-
-
-				console.log(document.getElementById('Legc1').style.backgroundColor);
-
-				//console.log($('#legc1').style.backgroundColor);
-			}
-		}
-	}
-}
-
-/* Função anonima com retorno
-quando o usuario pressionar um campo dentro do painel, deve executar essa função 
-que mostra o argumento no campo designado
-e para quando o campo estiver em branco, não deve mostrar nada
-*/
 let myFunction = (x) => {
+	/* Função anonima com retorno
+	quando o usuario pressionar um campo dentro do painel, deve executar essa função 
+	que mostra o argumento no campo designado
+	e para quando o campo estiver em branco, não deve mostrar nada
+	*/
 	if (x.innerHTML !== '') {
-		document.getElementById('resp').innerHTML = 'Você selecionou o contato:<strong>' + leContatos(parseInt(x.innerHTML)) + '</strong>';
+		document.getElementById('resp').innerHTML = 'Você selecionou o contato:<strong>' +
+			leContatos(parseInt(x.innerHTML)) + '</strong>';
 	} else {
 		document.getElementById('resp').innerHTML = '';
 	}
-	myFunction();
+	// myFunction(x);
 	/*
 	duas correções necessárias de lint
 	declaração de myfunction() pois como seu uso parte do html o lint nao visualiza a funcionalidade dentro do js
@@ -144,90 +49,14 @@ let myFunction = (x) => {
 	*/
 };
 
-//****************************************************************************** */
-/*Função anônima com argumento
-que recebe o numero do contato e faz a busta na lista para retornar os dados pre-definidos
-*/
-let leContatos = function (nrocont) {
-	for (let c = 0; c < contatos.length; c++) { //varre todos os contados
-		if (nrocont === contatos[c].nrocontato) { //quando localiza o contato pelo numero
-			contatoSelecionado = contatos[c].nrocontato; //marca o contato na memória como ponteiro
-			let r = 'Dia:' + contatos[c].dataContato;
-			r += ' - Nro:' + contatos[c].nrocontato;
-			r += ' - Cliente:' + contatos[c].cliente;
-			r += ' - Tipo:' + legendas[contatos[c].tipoAtendimento].innerText;
-			return r;//retorna informações para o painel
-		}
-	}
-	return nrocont;
-	/*
-	 correções necessárias de lint
-	 linha muito grande então r teve que ser declarado e acumulado em  r +=
-	*/
-};
 
-//****************************************************************************** */
-/*Função anônima sem argumento
-Finalidade: remover contato que está no ponteiro e retornar uma mensagem
-*/
-let removeContato = function () {
-	if (contatoSelecionado > 0) { //se tem contato no ponteiro (selecionado)
-		for (let c = 0; c < contatos.length; c++) { //lê todos os contatos
-			if (contatoSelecionado === contatos[c].nrocontato) { //quando encontrar
-				contatos.splice(c, 1); //remove
-				new DistribuiContatos(); //como alterou a array então remove e realoca no painel
-				window.alert('Contato removido com sucesso!'); //avisa que removeu
-				return true; //sai
-			}
-		}
-		window.alert('Não foi possível remover o contato, algo ocorreu de errado!');
-		//se cair aqui é porque o contato nao foi encontrado
-	} else { //caso contrario
-		window.alert('Não foi selecionado nenhum contato para remover!'); //exibe uma mensagem
-	}
-};
-//****************************************************************************** */
-/* Função Flecha - Arrow Function
-finalidade: gerar um contador progressivo, retornando valor e armazenando o resultado na variável
-*/
 let geraNroContato = () => {
 	return nroContato++; //acrescenta
 };
 
-//****************************************************************************** */
-/*Função anonima sem argumento
-limpa toda a agenda de contatos, 
-usada para mudança de data ou recolocação dos contatos
-*/
-function limpaAgenda() {
-	for (let linha = 1; linha < 10; linha++) {
-		document.getElementById('v' + linha + 'c0800').innerHTML = '';
-		document.getElementById('v' + linha + 'c0830').innerHTML = '';
-		document.getElementById('v' + linha + 'c0900').innerHTML = '';
-		document.getElementById('v' + linha + 'c0930').innerHTML = '';
-		document.getElementById('v' + linha + 'c1000').innerHTML = '';
-		document.getElementById('v' + linha + 'c1030').innerHTML = '';
-		document.getElementById('v' + linha + 'c1100').innerHTML = '';
-		document.getElementById('v' + linha + 'c1130').innerHTML = '';
-		document.getElementById('v' + linha + 'c1200').innerHTML = '';
-		document.getElementById('v' + linha + 'c1230').innerHTML = '';
-		document.getElementById('v' + linha + 'c1300').innerHTML = '';
-		document.getElementById('v' + linha + 'c1330').innerHTML = '';
-		document.getElementById('v' + linha + 'c1400').innerHTML = '';
-		document.getElementById('v' + linha + 'c1430').innerHTML = '';
-		document.getElementById('v' + linha + 'c1500').innerHTML = '';
-		document.getElementById('v' + linha + 'c1530').innerHTML = '';
-		document.getElementById('v' + linha + 'c1600').innerHTML = '';
-		document.getElementById('v' + linha + 'c1630').innerHTML = '';
-		document.getElementById('v' + linha + 'c1700').innerHTML = '';
-		document.getElementById('v' + linha + 'c1730').innerHTML = '';
-		document.getElementById('v' + linha + 'c1800').innerHTML = '';
-	}
-}
-//****************************************************************************** */
-//Função auto executavel que esta vinculada ao painel lateral usado para menus  id='sidebar'
-(function () {
 
+(function () {
+	//Função auto executavel que esta vinculada ao painel lateral usado para menus  id='sidebar'
 	var fullHeight = function () {
 		$('.js-fullheight').css('height', $(window).height());
 		$(window).resize(function () {
@@ -243,45 +72,67 @@ function limpaAgenda() {
 
 })(jQuery);
 
-//****************************************************************************** */
-//configurações do calendario para fechar quando clicado, portugues, tamanho e forma
-$('.form_date').datetimepicker({
-	language: 'pt-BR',
-	weekStart: 1,
-	todayBtn: 1,
-	autoclose: 1,
-	todayHighlight: 1,
-	startView: 2,
-	minView: 2,
-	forceParse: 0
-});
-$('.form_date').datetimepicker('setDate', new Date());
- 
-$('.form_date').on('change', function () {
-	new DistribuiContatos(); //distribui os contatos criados no painel.
-    });
+window.onload = function () {
+	//****************************************************************************** */
+	//configurações do calendario para fechar quando clicado, portugues, tamanho e forma
+	$('.form_date').datetimepicker({
+		language: 'pt-BR',
+		weekStart: 1,
+		todayBtn: 1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+	});
+	$('.form_date').datetimepicker('setDate', new Date());
 
-$('.form_date').click(function () {
-	new DistribuiContatos(); //distribui os contatos criados no painel.
-  });
+	$('.form_date').on('change', function () {
+		new DistribuiContatos(); //distribui os contatos criados no painel.
+	});
 
-//carregar a data corrente inicial caso nao tenha sido carregada
-if (dataCorrente === '') {
-	let ca = $('.form_date').datetimepicker('getDate');
-	dataCorrente = ca.getDate() + '/' + (ca.getMonth() + 1) + '/' + ca.getFullYear();
-	/*
-	 correções necessárias de lint
-	 linha muito grande então ca teve que ser declarado para referenciar
-	  $('.form_date').datetimepicker('getDate');
+	$('.form_date').click(function () {
+		new DistribuiContatos(); //distribui os contatos criados no painel.
+	});
+
+	//carregar a data corrente inicial caso nao tenha sido carregada
+	if (dataCorrente === '') {
+		let ca = $('.form_date').datetimepicker('getDate');
+		dataCorrente = ca.getDate() + '/' + (ca.getMonth() + 1) + '/' + ca.getFullYear();
+		/*
+		 correções necessárias de lint
+		 linha muito grande então ca teve que ser declarado para referenciar
+		  $('.form_date').datetimepicker('getDate');
+		*/
+	}
+
+
+	//****************************************************************************** */
+	/*função para atualizar automaticamente apos um determinado tempo
+	usa setInterval para atualizar o cronometro a cada 1 segundo
 	*/
-}
+	setInterval(AtualizarAutomaticamente, 1000);
+}();
 
+$(window).load(function () {
+	//****************************************************************************** */
+	/* Evento de carregamento do documento - onload
+	Coloquei aqui o que quero que carregue no inicio 
+	para facilitar os testes
+	*/
+	vendedor = database.get('Vendedores');
+	if (vendedor == null) {
+		vendedor = ['Alexandre', 'Daniele', 'Fernando', 'Lidiane',
+			'Lucas', 'Orlei', 'Paulo', 'Silvani'
+		];
+		database.set('Vendedores', vendedor);
+	}
+	new CarregaVendedoresPainel(vendedor); //coloca os vendedores no painel
+	new CargaInicialDidatica();
+	setInterval(horario, 1000); //mostra o horário no foot da tela
 
-//****************************************************************************** */
-/*função para atualizar automaticamente apos um determinado tempo
-usa setInterval para atualizar o cronometro a cada 1 segundo
-*/
-setInterval(AtualizarAutomaticamente, 1000);
+});
+
 function AtualizarAutomaticamente() {
 	tempoAtualizarAutomaticamente = tempoAtualizarAutomaticamente - 1;
 	if (tempoAtualizarAutomaticamente === 0) {
@@ -296,15 +147,33 @@ function AtualizarAutomaticamente() {
 a princípio soment mostrando o seu nome, mas é possivel fazer um case select para colocar
 instruções de como é cada atendimento, presencial ou nao */
 
-document.querySelector('#Leg1').addEventListener('mousemove', function () {passouOMouse(0);});
-document.querySelector('#Leg2').addEventListener('mousemove', function () {passouOMouse(1);});
-document.querySelector('#Leg3').addEventListener('mousemove', function () {passouOMouse(2);});
-document.querySelector('#Leg4').addEventListener('mousemove', function () {passouOMouse(3);});
-document.querySelector('#Leg5').addEventListener('mousemove', function () {passouOMouse(4);});
-document.querySelector('#Leg6').addEventListener('mousemove', function () {passouOMouse(5);});
-document.querySelector('#Leg7').addEventListener('mousemove', function () {passouOMouse(6);});
-document.querySelector('#Leg8').addEventListener('mousemove', function () {passouOMouse(7);});
-document.querySelector('#Leg9').addEventListener('mousemove', function () {passouOMouse(8);});
+document.querySelector('#Leg1').addEventListener('mousemove', function () {
+	passouOMouse(0);
+});
+document.querySelector('#Leg2').addEventListener('mousemove', function () {
+	passouOMouse(1);
+});
+document.querySelector('#Leg3').addEventListener('mousemove', function () {
+	passouOMouse(2);
+});
+document.querySelector('#Leg4').addEventListener('mousemove', function () {
+	passouOMouse(3);
+});
+document.querySelector('#Leg5').addEventListener('mousemove', function () {
+	passouOMouse(4);
+});
+document.querySelector('#Leg6').addEventListener('mousemove', function () {
+	passouOMouse(5);
+});
+document.querySelector('#Leg7').addEventListener('mousemove', function () {
+	passouOMouse(6);
+});
+document.querySelector('#Leg8').addEventListener('mousemove', function () {
+	passouOMouse(7);
+});
+document.querySelector('#Leg9').addEventListener('mousemove', function () {
+	passouOMouse(8);
+});
 
 function passouOMouse(n) {
 	//Imprimir alguma propriedade do objeto event recebido como parâmetro
@@ -318,16 +187,7 @@ pedi para colocar o titulo em substituição ao campo arrya 0
 let CabecalhoAgenda = document.getElementsByTagName('h4');
 CabecalhoAgenda[0].innerText = document.title;
 
-//****************************************************************************** */
-/* Evento de carregamento do documento - onload
-Coloquei aqui o que quero que carregue no inicio 
-para facilitar os testes
-*/
-$(window).load(function () {
 
-	new CarregaVendedores(); //coloca os vendedores no painel
-	setInterval(horario, 1000);  //mostra o horário no foot da tela
-});
 
 /*
 Trabalhando com eventos no JavaScript
@@ -336,38 +196,27 @@ Evento Inline
 */
 var btaoDidatico = document.getElementById('btCargaInicialDidatica');
 btaoDidatico.onclick = function () {
+	console.log('teste')
 	new CargaInicialDidatica();
 };
 
-//função que controi o horário Longo
-function horario() {
 
-  var relogio = document.querySelector('#relogio');
-  var d = new Date();
-  var seg = d.getSeconds();
-  var min = d.getMinutes();
-  var hr = d.getHours();
-  var dia = d.getDate();
-  var mes = d.getMonth();
-  var meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-  var diaSem = d.getDay();
-  var diasSemana = ['Domingo','Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira','Sábado'];
-		relogio.innerHTML = diasSemana[diaSem] + ', ' + dia + ' de ' + meses[mes] + ', ' + hr + ':' + min + ':' + seg;
-}
 
 //****************************************************************************** */
 // Evento de teclado com o uso de keyCode
 document.addEventListener('keydown', teclaPressionada);
+
 function teclaPressionada(event) {
-     if(event.which===119){   //tecla F8
-		 criacaoContato();
-    } else if (event.which===120) {    //tecla F9
-		 removeContato();
-    }
+	if (event.which === 119) { //tecla F8
+		criacaoContato();
+	} else if (event.which === 120) { //tecla F9
+		removeContato();
+	}
 }
 
 function CargaInicialDidatica() {
-		//lançamento de contatos para testes e simulações
+
+	//lançamento de contatos para testes e simulações
 	contatos.push(new Contatos('Alexandre', geraNroContato(), 'Givanildo', 1, '0800', dataCorrente));
 	contatos.push(new Contatos('Daniele', geraNroContato(), 'Elisangela', 2, '1030', dataCorrente));
 	contatos.push(new Contatos('Fernando', geraNroContato(), 'Lucas', 1, '1130', dataCorrente));
@@ -384,12 +233,9 @@ function CargaInicialDidatica() {
 	contatos.push(new Contatos('Orlei', geraNroContato(), 'Elisangela', 3, '1030', dataCorrente));
 	contatos.push(new Contatos('Silvani', geraNroContato(), 'Lucas', 1, '1130', dataCorrente));
 
-
-	new DistribuiContatos(); //distribui os contatos criados no painel.
-	setTimeout(function () {       //em 1 segundos ira avisar que a carga foi executada e fecha o sidebar
+	DistribuiContatos(); //distribui os contatos criados no painel.
+	setTimeout(function () { //em 1 segundos ira avisar que a carga foi executada e fecha o sidebar
 		window.alert('Carga Inicial Executada');
 		$('#sidebar').toggleClass('active');
-	}, 100);  //mensagem com delay pois aguarda o prenchimento da tela
+	}, 100); //mensagem com delay pois aguarda o prenchimento da tela
 }
-
-
