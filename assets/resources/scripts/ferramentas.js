@@ -1,8 +1,21 @@
-/*
-Ferramentas   - local storage para armazenar os dados
-*/
+/*  Ferramentas */
 
 'use strict';
+/*global main */
+/*global database */
+/* jshint -W098 */
+/*global Contatos */
+/*global contatos */
+/*global vendedor */
+/*global dataCorrente */
+/*global legendas */
+
+// let nroContato = 1000;
+let contatoSelecionado = 0;
+let horas = ['08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+    '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30',
+    '16:00', '16:30', '17:00', '17:30', '18:00'
+];
 
 function CarregaVendedoresPainel(arrayVendedores) { //carrega os vendedores no painel
     arrayVendedores.sort(); //organiza em ordem alfabética a lista de vendedores
@@ -50,8 +63,9 @@ function criacaoContato() { //cria um contato usando prompt
     }
     //fim da validação!
     if (window.confirm('Deseja inserir o contato?')) {
-        var contato = new Contatos(v, geraNroContato(), c, 1, h, dataCorrente);
+        var contato = new Contatos(v, c, 1, h, dataCorrente);
         contatos.push(contato); //insere o contato
+        database.saveItemArray('arrayContatos', contato);
         new DistribuiContatos(); //distribui na tela
         //inseri o setTime, para que o Distribuidor dos contatos, possa inserir o contato 
         //sem sem perturbado pelo comfirm
@@ -63,6 +77,21 @@ function criacaoContato() { //cria um contato usando prompt
     correções necessárias de lint
     inclusao de window. antes de confirm, alert ou promp para não gerar erro w117 [x is not defined]
     */
+}
+
+function InsereContatosViaForm() {
+    //fim da validação!
+    // if (window.confirm('Deseja inserir o contato?')) {
+    var contato = new Contatos($('#SelecVendedor option:selected').val(),
+        $('#NomeCliente').val(),
+        parseInt($('#SelecTipoAt option:selected').val().substring(0, 1)),
+        $('#SelecHora option:selected').val().replaceAll(':', ''),
+        dataCorrente);
+    console.log(contato);
+    contatos.push(contato); //insere o contato
+    database.saveItemArray('arrayContatos', contato);
+    new DistribuiContatos(); //distribui na tela
+    // }
 }
 
 function DistribuiContatos() { //faz a busca nos contatos e posiciona no painel conforme a data, horario e vendedor
@@ -101,12 +130,16 @@ function horario() { //função que controi o horário Longo
 }
 
 let removeContato = function () { //remover contato que está no ponteiro e retornar uma mensagem
+    if (document.getElementById('resp').innerHTML === '') //se não tiver nada na bandeja de seleção
+        return; //sai
     if (contatoSelecionado > 0) { //se tem contato no ponteiro (selecionado)
         for (let c = 0; c < contatos.length; c++) { //lê todos os contatos
             if (contatoSelecionado === contatos[c].nrocontato) { //quando encontrar
                 contatos.splice(c, 1); //remove
+                database.remove('arrayContatos');
+                database.setArray('arrayContatos', contatos);
                 new DistribuiContatos(); //como alterou a array então remove e realoca no painel
-                window.alert('Contato removido com sucesso!'); //avisa que removeu
+                window.alert('Contato ' + contatoSelecionado + '  removido com sucesso!'); //avisa que removeu
                 return true; //sai
             }
         }
@@ -135,16 +168,87 @@ function limpaAgenda() { //Limpa agenda contatos, usada na realocação ou mudan
         }
     }
 }
-
 let leContatos = (nrocont) => {
     //Função Flecha - que recebe o numero do contato e faz a busta na lista para retornar os dados pre-definidos
+    let legendas = document.getElementsByName('legend'); //carrega a variavel legendas como um array
     for (let c = 0; c < contatos.length; c++) { //varre todos os contados
         if (nrocont === contatos[c].nrocontato) { //quando localiza o contato pelo numero
             contatoSelecionado = contatos[c].nrocontato; //marca o contato na memória como ponteiro
-            return 'Dia:' + contatos[c].dataContato +
-                ' - Nro:' + contatos[c].nrocontato +
-                ' - Cliente:' + contatos[c].cliente +
-                ' - Tipo:' + legendas[contatos[c].tipoAtendimento].innerText;
+            return 'Dia: ' + contatos[c].dataContato +
+                ' \nNro: ' + contatos[c].nrocontato +
+                ' \nCliente: ' + contatos[c].cliente +
+                ' \nTipo: ' + legendas[(contatos[c].tipoAtendimento) - 1].innerText;
         }
     }
 };
+
+let myFunction = (x) => {
+    /* Função anonima com retorno
+    quando o usuario pressionar um campo dentro do painel, deve executar essa função 
+    que mostra o argumento no campo designado
+    e para quando o campo estiver em branco, não deve mostrar nada
+    */
+    // document.getElementById('resp').innerHTML = '';
+    x.title = '';
+    x.setAttribute('data-toggle', 'tooltip');
+    x.setAttribute('onclick', 'myFunctionClique(this)');
+    x.style.cursor = 'default';
+
+    if (x.innerHTML !== '') {
+        let r = leContatos(parseInt(x.innerHTML));
+        x.title = r;
+        x.style.cursor = 'pointer';
+    }
+
+    // myFunction(x);
+    /*
+    duas correções necessárias de lint
+    declaração de myfunction() pois como seu uso parte do html o lint nao visualiza a funcionalidade dentro do js
+    inplantação da conversao parseInt, para transformar o nro do contato em valor porque se usar === na comparação 
+    da função leContatos ele persebe que o tipo string não é igual ao tipo int, logo , um dos dois tem que ser con-
+    vertido 2 == "2" [com o uso de === não é igual]
+    */
+};
+
+let myFunctionClique = (x) => {
+    document.getElementById('resp').innerHTML = '';
+    if (x.title !== '')
+        document.getElementById('resp').innerHTML = 'Você selecionou o contato: <strong>' +
+        x.title +
+        '</strong>';
+};
+
+function CarregaForm() {
+    // Carrega linha de cabeçalho na tabela
+    var $wrapper = document.getElementById('linhaHorarios');
+    var horasinvertido = horas.slice(0).reverse();
+    for (let index = 0; index < horasinvertido.length; index++)
+        $wrapper.insertAdjacentHTML('afterbegin', '<th scope = "col">' + horasinvertido[index] + '</th>');
+    $wrapper.insertAdjacentHTML('afterbegin', '<th scope = "col">Vendedores</th>');
+
+    // Carrega Select de horas no formulario 
+    var $formHora = document.getElementById('SelecHora');
+    for (let index = 0; index < horasinvertido.length; index++)
+        $formHora.insertAdjacentHTML('afterbegin', '<option>' + horasinvertido[index] + '</option>');
+
+    // Carrega Select de vendedores no formulario 
+    var $formVendedor = document.getElementById('SelecVendedor');
+    var vendedorinvertido = vendedor.slice(0).reverse();
+    for (let index = 0; index < vendedor.length; index++)
+        $formVendedor.insertAdjacentHTML('afterbegin', '<option>' + vendedorinvertido[index] + '</option>');
+
+    // Carrega Select de tipos de atendimento no formulario usando nodes
+    var nodes = document.getElementById('MinhasLegendas').querySelectorAll('li');
+    var list = [].slice.call(nodes);
+    let c = 1;
+    var innertext = list.map(function (e) { // uso de map para
+        return c++ + '-' + e.innerText;
+    }).join('\n');
+    let tiposAtendimentos = [];
+    tiposAtendimentos = innertext.split('\n'); //manipulação de variável
+    var $formLegendas = document.getElementById('SelecTipoAt');
+    var tipoAteInvertido = tiposAtendimentos.slice(0).reverse();
+    for (let index = 0; index < tipoAteInvertido.length; index++)
+        $formLegendas.insertAdjacentHTML('afterbegin', '<option>' + tipoAteInvertido[index] + '</option>');
+
+}

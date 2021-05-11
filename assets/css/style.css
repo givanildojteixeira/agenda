@@ -37,3 +37,35 @@
 .atend9 {
   background: rgb(175, 32, 175);
 }
+
+.row.centro {
+  background-color: gainsboro;
+  height: 14vh;
+}
+
+.modal {
+  text-align: center;
+  align-content: center;
+
+}
+
+/* .modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+} */
+
+
+.modal-dialog {
+  display: inline;
+  text-align: center;
+  vertical-align: top;
+  position:relative;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 500px;
+  height: 300px;
+}

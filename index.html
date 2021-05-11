@@ -5,19 +5,12 @@
 	<title>Painel Vendedor</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="./assets/css/style.css">
 	<link rel="stylesheet" href="./assets/libraries/bootstrap/css/bootstrap-datetimepicker.min.css" media="screen"
 		type="text/css">
 	<link rel="stylesheet" href="./assets/libraries/bootstrap/css/style.css">
 	<link rel="stylesheet" href="./assets/libraries/bootstrap/css/bootstrap.min.css" media="screen">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-	<style>
-		.row.centro {
-			background-color: gainsboro;
-			height: 14vh;
-		}
-	</style>
+	<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
@@ -55,6 +48,7 @@
 				</div>
 			</div>
 		</nav>
+
 		<!-- Conteudo da Pagina  -->
 		<div class="container-fluid">
 			<!-- Cabeçalho -->
@@ -110,247 +104,226 @@
 					<table id="my-table"
 						class="table table-sm table-responsive-sm table-bordered rounded text-center my-table ">
 						<thead>
-							<tr class="table-success">
-								<th scope="col">Vendedor</th>
-								<th scope="col">08:00</th>
-								<th scope="col">08:30</th>
-								<th scope="col">09:00</th>
-								<th scope="col">09:30</th>
-								<th scope="col">10:00</th>
-								<th scope="col">10:30</th>
-								<th scope="col">11:00</th>
-								<th scope="col">11:30</th>
-								<th scope="col">12:00</th>
-								<th scope="col">12:30</th>
-								<th scope="col">13:00</th>
-								<th scope="col">13:30</th>
-								<th scope="col">14:00</th>
-								<th scope="col">14:30</th>
-								<th scope="col">15:00</th>
-								<th scope="col">15:30</th>
-								<th scope="col">16:00</th>
-								<th scope="col">16:30</th>
-								<th scope="col">17:00</th>
-								<th scope="col">17:30</th>
-								<th scope="col">18:00</th>
+							<tr class="table-success" id="linhaHorarios">
+								<!-- Insere Linha de Cabeçalho -->
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="tabelaDados">
 							<tr id="linha1">
 								<th id='v1c0' scope="row"></th>
-								<td onclick="myFunction(this)" id='v1c0800' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c0830' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c0900' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c0930' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1000' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1030' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1100' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1130' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1200' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1230' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1300' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1330' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1400' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1430' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1500' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1530' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1600' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1630' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1700' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1730' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v1c1800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c0800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c0830' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c0900' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c0930' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1000' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1030' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1100' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1130' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1200' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1230' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1300' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1330' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1400' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1430' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1500' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1530' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1600' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1630' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1700' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1730' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v1c1800' scope="row"> </td>
 							</tr>
 							<tr id="linha2">
 								<th id='v2c0' scope="row"></th>
-								<td onclick="myFunction(this)" id='v2c0800' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c0830' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c0900' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c0930' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1000' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1030' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1100' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1130' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1200' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1230' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1300' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1330' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1400' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1430' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1500' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1530' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1600' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1630' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1700' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1730' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v2c1800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c0800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c0830' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c0900' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c0930' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1000' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1030' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1100' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1130' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1200' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1230' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1300' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1330' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1400' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1430' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1500' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1530' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1600' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1630' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1700' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1730' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v2c1800' scope="row"> </td>
 							</tr>
 							<tr id="linha3">
 								<th id='v3c0' scope="row"></th>
-								<td onclick="myFunction(this)" id='v3c0800' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c0830' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c0900' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c0930' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1000' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1030' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1100' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1130' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1200' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1230' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1300' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1330' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1400' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1430' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1500' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1530' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1600' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1630' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1700' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1730' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v3c1800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c0800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c0830' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c0900' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c0930' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1000' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1030' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1100' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1130' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1200' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1230' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1300' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1330' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1400' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1430' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1500' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1530' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1600' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1630' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1700' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1730' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v3c1800' scope="row"> </td>
 							</tr>
 							<tr id="linha4">
 								<th id='v4c0' scope="row"></th>
-								<td onclick="myFunction(this)" id='v4c0800' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c0830' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c0900' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c0930' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1000' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1030' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1100' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1130' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1200' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1230' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1300' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1330' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1400' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1430' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1500' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1530' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1600' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1630' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1700' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1730' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v4c1800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c0800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c0830' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c0900' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c0930' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1000' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1030' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1100' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1130' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1200' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1230' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1300' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1330' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1400' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1430' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1500' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1530' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1600' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1630' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1700' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1730' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v4c1800' scope="row"> </td>
 							</tr>
 							<tr id="linha5">
 								<th id='v5c0' scope="row"></th>
-								<td onclick="myFunction(this)" id='v5c0800' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c0830' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c0900' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c0930' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1000' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1030' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1100' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1130' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1200' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1230' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1300' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1330' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1400' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1430' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1500' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1530' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1600' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1630' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1700' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1730' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v5c1800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c0800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c0830' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c0900' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c0930' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1000' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1030' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1100' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1130' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1200' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1230' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1300' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1330' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1400' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1430' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1500' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1530' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1600' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1630' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1700' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1730' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v5c1800' scope="row"> </td>
 							</tr>
 							<tr id="linha6">
 								<th id='v6c0' scope="row"></th>
-								<td onclick="myFunction(this)" id='v6c0800' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c0830' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c0900' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c0930' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1000' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1030' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1100' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1130' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1200' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1230' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1300' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1330' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1400' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1430' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1500' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1530' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1600' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1630' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1700' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1730' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v6c1800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c0800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c0830' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c0900' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c0930' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1000' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1030' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1100' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1130' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1200' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1230' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1300' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1330' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1400' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1430' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1500' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1530' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1600' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1630' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1700' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1730' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v6c1800' scope="row"> </td>
 							</tr>
 							<tr id="linha7">
 								<th id='v7c0' scope="row"></th>
-								<td onclick="myFunction(this)" id='v7c0800' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c0830' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c0900' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c0930' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1000' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1030' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1100' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1130' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1200' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1230' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1300' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1330' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1400' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1430' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1500' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1530' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1600' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1630' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1700' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1730' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v7c1800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c0800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c0830' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c0900' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c0930' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1000' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1030' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1100' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1130' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1200' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1230' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1300' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1330' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1400' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1430' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1500' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1530' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1600' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1630' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1700' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1730' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v7c1800' scope="row"> </td>
 							</tr>
 							<tr id="linha8">
 								<th id='v8c0' scope="row"></th>
-								<td onclick="myFunction(this)" id='v8c0800' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c0830' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c0900' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c0930' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1000' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1030' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1100' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1130' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1200' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1230' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1300' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1330' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1400' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1430' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1500' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1530' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1600' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1630' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1700' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1730' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v8c1800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c0800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c0830' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c0900' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c0930' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1000' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1030' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1100' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1130' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1200' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1230' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1300' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1330' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1400' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1430' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1500' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1530' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1600' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1630' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1700' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1730' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v8c1800' scope="row"> </td>
 							</tr>
 							<tr id="linha9">
 								<th id='v9c0' scope="row"></th>
-								<td onclick="myFunction(this)" id='v9c0800' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c0830' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c0900' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c0930' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1000' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1030' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1100' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1130' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1200' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1230' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1300' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1330' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1400' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1430' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1500' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1530' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1600' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1630' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1700' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1730' scope="row"> </td>
-								<td onclick="myFunction(this)" id='v9c1800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c0800' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c0830' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c0900' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c0930' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1000' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1030' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1100' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1130' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1200' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1230' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1300' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1330' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1400' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1430' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1500' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1530' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1600' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1630' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1700' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1730' scope="row"> </td>
+								<td onmouseover="myFunction(this)" id='v9c1800' scope="row"> </td>
 							</tr>
 						</tbody>
 					</table>
@@ -365,27 +338,27 @@
 					<!-- Legenda -->
 					<div class="col-6 sidenav my-legend">
 						<div class='legend-title'>Legenda Tipo de Atendimentos</div>
-						<div class="row">
+						<div class="row" id='MinhasLegendas'>
 							<div class="col">
 								<div class='legend-scale'>
 									<ul class='legend-labels'>
-										<li id='Leg1' name="legend"><span class="atend1" id='Legc1'></span>ATENDIMENTO
+										<li id='Leg' name="legend"><span class="atend1" id='Legc1'></span>ATENDIMENTO
 											AGENDA</li>
-										<li id='Leg2' name="legend"><span class="atend2" id='Legc2'></span>TELEFONE</li>
-										<li id='Leg3' name="legend"><span class="atend3" id='Legc3'></span>BLOQUEIO</li>
+										<li id='Leg' name="legend"><span class="atend2" id='Legc2'></span>TELEFONE</li>
+										<li id='Leg' name="legend"><span class="atend3" id='Legc3'></span>BLOQUEIO</li>
 									</ul>
 								</div>
 							</div>
 							<div class="col">
 								<div class='legend-scale'>
 									<ul class='legend-labels'>
-										<li id='Leg4' name="legend"><span class="atend4" id='Legc4'></span>ATENDIMENTO
+										<li id='Leg' name="legend"><span class="atend4" id='Legc4'></span>ATENDIMENTO
 											PRIORIT.</li>
-										<li id='Leg5' name="legend">
+										<li id='Leg' name="legend">
 											<span class="atend5" id='Legc5'></span>
 											RETORNO CLIENTE
 										</li>
-										<li id='Leg6' name="legend"><span class="atend6" id='Legc6'></span>CURSO
+										<li id='Leg' name="legend"><span class="atend6" id='Legc6'></span>CURSO
 											TREINAMENTO</li>
 									</ul>
 								</div>
@@ -393,11 +366,10 @@
 							<div class="col">
 								<div class='legend-scale'>
 									<ul class='legend-labels'>
-										<li id='Leg7' name="legend"><span class="atend7" id='Legc7'></span>ATENDIMENTO
+										<li id='Leg' name="legend"><span class="atend7" id='Legc7'></span>AT.
 											PASSANTE </li>
-										<li id='Leg8' name="legend"><span class="atend8" id='Legc8'></span>RETORNO POR
-											CHAMADA</li>
-										<li id='Leg9' name="legend"><span class="atend9"
+										<li id='Leg' name="legend"><span class="atend8" id='Legc8'></span>RETORNO</li>
+										<li id='Leg' name="legend"><span class="atend9"
 												id='Legc9'></span>FÉRIAS/DISPENSA
 										</li>
 									</ul>
@@ -406,6 +378,7 @@
 						</div>
 					</div>
 
+
 					<!-- botoes -->
 					<div class="col sidenav">
 						<div class="row centro align-items-center justify-content-center">
@@ -413,9 +386,8 @@
 								<input class="btn btn-primary btn-block" type="button" value="F8 - Insere Agenda"
 									data-toggle="tooltip" data-placement="top" title="Insere novos contatos na Agenda"
 									onclick="criacaoContato()">
-								<input class="btn btn-primary btn-block" type="button" value="Troca Vendedor"
-									data-toggle="tooltip" data-placement="top" title="Troca de Vendedor Agenda"
-									onclick="trocavendedor()">
+								<button class="btn btn-primary btn-block" id="criar-modal" data-toggle="tooltip"
+									title="Insere contato por formulario">Formulario</button>
 							</div>
 							<div class="col">
 								<input class="btn btn-primary btn-block" type="button" value="F9 - Remove Agenda"
@@ -428,10 +400,50 @@
 					</div>
 				</div>
 			</div>
-			<p></p>
+
+			<!-- Cabeçalho do Modal -->
+			<div class="modal col-md-9" id="modal-alerta">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- Corpo do Modal -->
+						<div class="form-row">
+							<div class="col">
+								<div class="col-md-6 form-group">
+									<!-- Cabeçalho do Modal -->
+									<div class="modal-header">
+										<h3>Cadastro de Agendamentos</h3>
+									</div>
+									<label>Nome do Cliente</label>
+									<input type="text" class="form-control" id="NomeCliente"
+										placeholder="Digite o Nome do Cliente">
+									<label>Selecione o Vendedor</label>
+									<select class="form-control" id="SelecVendedor">
+										<option hidden>Nome do Vendedor</option>
+									</select>
+									<label>Selecione o Horário</label>
+									<select class="form-control" id="SelecHora">
+										<option hidden>Horário de atendimento</option>
+									</select>
+									<label>Selecione o Tipo de Atendimento</label>
+									<select class="form-control" id="SelecTipoAt">
+										<option hidden>Tipo de atendimento</option>
+									</select>
+									<!-- Rodapé do Modal -->
+									<div class="modal-footer">
+										<button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+										<button class="btn btn-primary" data-dismiss="modal"
+											onclick="InsereContatosViaForm()">Registrar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
 
 			<!-- footer -->
-			<footer class="container-fluid rounded">
+			<footer class=" container-fluid rounded">
 				<div class="row">
 					<div class="col-9">
 						<div id="resp"></div>
@@ -452,8 +464,14 @@
 	<script src="./assets/libraries/bootstrap/popper.js"></script>
 	<script src="./assets/libraries/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./assets/resources/scripts/main.js"> </script>
-	<script type="text/javascript" src="./assets/resources/scripts/ferramentas.js"> </script>
+	<script type="text/javascript" src="./assets/resources/scripts/ferramentas.js">
+	</script>
 	<script type="text/javascript" src="./assets/resources/scripts/database.js"> </script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+	</script>
+
+
 </body>
 
 </html>

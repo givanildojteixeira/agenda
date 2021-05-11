@@ -40,6 +40,9 @@ let database = {
     },
     sequenceId: function (key) {
         return this.getArray(key).length;
+    },
+    remove: function (key) {
+        localStorage.removeItem(key);
     }
 };
 database.get();
