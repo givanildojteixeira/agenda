@@ -12,6 +12,7 @@
 
 // let nroContato = 1000;
 let contatoSelecionado = 0;
+let contatoMarcado = 0;
 let horas = ['08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
     '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30',
     '16:00', '16:30', '17:00', '17:30', '18:00'
@@ -80,8 +81,18 @@ function criacaoContato() { //cria um contato usando prompt
 }
 
 function InsereContatosViaForm() {
-    //fim da validação!
-    // if (window.confirm('Deseja inserir o contato?')) {
+
+    if ($('#SelecVendedor option:selected').val() === 0)
+        return;
+    if ($('#NomeCliente').val() === '')
+        return;
+    if ($('#SelecTipoAt option:selected').val() === 'Tipo de atendimento')
+        return;
+    if ($('#SelecHora option:selected').val().replaceAll(':', '') === '')
+        return;
+
+    //fim da validação de segurança
+
     var contato = new Contatos($('#SelecVendedor option:selected').val(),
         $('#NomeCliente').val(),
         parseInt($('#SelecTipoAt option:selected').val().substring(0, 1)),
@@ -91,7 +102,7 @@ function InsereContatosViaForm() {
     contatos.push(contato); //insere o contato
     database.saveItemArray('arrayContatos', contato);
     new DistribuiContatos(); //distribui na tela
-    // }
+
 }
 
 function DistribuiContatos() { //faz a busca nos contatos e posiciona no painel conforme a data, horario e vendedor
@@ -103,12 +114,15 @@ function DistribuiContatos() { //faz a busca nos contatos e posiciona no painel 
             //inserido toUpperCase() no tratamento da String para desconsiderar problemas com comparação da String
             if ((vendedor[v].toUpperCase() === contatos[c].vendedor.toUpperCase()) && (dataCorrente === contatos[c].dataContato)) {
                 //se for um contato do vendedor na data mostrada na tela, então coleta os dados
+
+                // alert(contatos[c].nrocontato + '=>' + ('v' + (v + 1) + 'c' + contatos[c].horario));
                 let localContato = document.getElementById('v' + (v + 1) + 'c' + contatos[c].horario);
                 let elem = document.getElementById('Legc' + contatos[c].tipoAtendimento);
                 let corLegenda = window.getComputedStyle(elem, null).getPropertyValue('background-color');
                 // e coloca no local correto no painel
                 localContato.innerHTML = contatos[c].nrocontato;
                 localContato.style.backgroundColor = corLegenda;
+                localContato.setAttribute('class', 'btn btn-default');
             }
         }
     }
@@ -132,19 +146,21 @@ function horario() { //função que controi o horário Longo
 let removeContato = function () { //remover contato que está no ponteiro e retornar uma mensagem
     if (document.getElementById('resp').innerHTML === '') //se não tiver nada na bandeja de seleção
         return; //sai
-    if (contatoSelecionado > 0) { //se tem contato no ponteiro (selecionado)
-        for (let c = 0; c < contatos.length; c++) { //lê todos os contatos
-            if (contatoSelecionado === contatos[c].nrocontato) { //quando encontrar
-                contatos.splice(c, 1); //remove
-                database.remove('arrayContatos');
-                database.setArray('arrayContatos', contatos);
-                new DistribuiContatos(); //como alterou a array então remove e realoca no painel
-                window.alert('Contato ' + contatoSelecionado + '  removido com sucesso!'); //avisa que removeu
-                return true; //sai
+    if (contatoMarcado > 0) { //se tem contato no ponteiro (selecionado)
+        if (window.confirm('Deseja remover o contato nro ' + contatoMarcado + '?')) {
+            for (let c = 0; c < contatos.length; c++) { //lê todos os contatos
+                if (contatoMarcado === contatos[c].nrocontato) { //quando encontrar
+                    contatos.splice(c, 1); //remove
+                    database.remove('arrayContatos');
+                    database.setArray('arrayContatos', contatos);
+                    new DistribuiContatos(); //como alterou a array então remove e realoca no painel
+                    window.alert('Contato ' + contatoMarcado + '  removido com sucesso!'); //avisa que removeu
+                    document.getElementById('remove-contato').value = 'F9 - Remove Agenda';
+                    document.getElementById('atendimento-contato').value = 'Cadastro Atendimento';
+                    return true; //sai
+                }
             }
         }
-        window.alert('Não foi possível remover o contato, algo ocorreu de errado!');
-        //se cair aqui é porque o contato nao foi encontrado
     } else { //caso contrario
         window.alert('Não foi selecionado nenhum contato para remover!'); //exibe uma mensagem
     }
@@ -164,6 +180,8 @@ function limpaAgenda() { //Limpa agenda contatos, usada na realocação ou mudan
                 }
                 document.getElementById(idlocal).innerHTML = ''; //limpa o campo
                 document.getElementById(idlocal).style.backgroundColor = 'White'; //backgr = branco
+                document.getElementById(idlocal).removeAttribute('class'); //retira efeitos class para campos em branco
+
             }
         }
     }
@@ -174,13 +192,15 @@ let leContatos = (nrocont) => {
     for (let c = 0; c < contatos.length; c++) { //varre todos os contados
         if (nrocont === contatos[c].nrocontato) { //quando localiza o contato pelo numero
             contatoSelecionado = contatos[c].nrocontato; //marca o contato na memória como ponteiro
-            return 'Dia: ' + contatos[c].dataContato +
-                ' \nNro: ' + contatos[c].nrocontato +
+            return ' Nro: ' + contatos[c].nrocontato +
+                ' \nDia: ' + contatos[c].dataContato +
+                ' \nHora: ' + contatos[c].horario +
                 ' \nCliente: ' + contatos[c].cliente +
                 ' \nTipo: ' + legendas[(contatos[c].tipoAtendimento) - 1].innerText;
         }
     }
 };
+
 
 let myFunction = (x) => {
     /* Função anonima com retorno
@@ -188,34 +208,41 @@ let myFunction = (x) => {
     que mostra o argumento no campo designado
     e para quando o campo estiver em branco, não deve mostrar nada
     */
-    // document.getElementById('resp').innerHTML = '';
+
     x.title = '';
-    x.setAttribute('data-toggle', 'tooltip');
-    x.setAttribute('onclick', 'myFunctionClique(this)');
     x.style.cursor = 'default';
 
     if (x.innerHTML !== '') {
-        let r = leContatos(parseInt(x.innerHTML));
-        x.title = r;
+        // let r = leContatos(parseInt(x.innerHTML));
         x.style.cursor = 'pointer';
+        x.setAttribute('data-toggle', 'tooltip');
+        // console.log(x.id.substring(3, 5));
+        if (x.id.substring(3, 5) > 12) {
+            x.setAttribute('data-placement', 'left');
+        } else {
+            x.setAttribute('data-placement', 'right');
+        }
+        x.setAttribute('onclick', 'myFunctionClique(this)');
+        x.title = leContatos(parseInt(x.innerHTML));
     }
+    $(x).tooltip('show');
+    x.title = '';
 
-    // myFunction(x);
-    /*
-    duas correções necessárias de lint
-    declaração de myfunction() pois como seu uso parte do html o lint nao visualiza a funcionalidade dentro do js
-    inplantação da conversao parseInt, para transformar o nro do contato em valor porque se usar === na comparação 
-    da função leContatos ele persebe que o tipo string não é igual ao tipo int, logo , um dos dois tem que ser con-
-    vertido 2 == "2" [com o uso de === não é igual]
-    */
+
 };
 
 let myFunctionClique = (x) => {
     document.getElementById('resp').innerHTML = '';
-    if (x.title !== '')
+    let r = leContatos(parseInt(x.innerHTML));
+    // alert(r);
+    if (r !== '') {
         document.getElementById('resp').innerHTML = 'Você selecionou o contato: <strong>' +
-        x.title +
-        '</strong>';
+            r +
+            '</strong>';
+        document.getElementById('remove-contato').value = 'F9 - Remove Agenda ' + contatoSelecionado;
+        document.getElementById('atendimento-contato').value = 'Cadastro Atendimento ' + contatoSelecionado;
+        contatoMarcado = contatoSelecionado;
+    }
 };
 
 function CarregaForm() {
@@ -225,11 +252,6 @@ function CarregaForm() {
     for (let index = 0; index < horasinvertido.length; index++)
         $wrapper.insertAdjacentHTML('afterbegin', '<th scope = "col">' + horasinvertido[index] + '</th>');
     $wrapper.insertAdjacentHTML('afterbegin', '<th scope = "col">Vendedores</th>');
-
-    // Carrega Select de horas no formulario 
-    var $formHora = document.getElementById('SelecHora');
-    for (let index = 0; index < horasinvertido.length; index++)
-        $formHora.insertAdjacentHTML('afterbegin', '<option>' + horasinvertido[index] + '</option>');
 
     // Carrega Select de vendedores no formulario 
     var $formVendedor = document.getElementById('SelecVendedor');
@@ -251,4 +273,59 @@ function CarregaForm() {
     for (let index = 0; index < tipoAteInvertido.length; index++)
         $formLegendas.insertAdjacentHTML('afterbegin', '<option>' + tipoAteInvertido[index] + '</option>');
 
+
+}
+jQuery('#SelecVendedor').change(function () {
+    // Aqui você tem o value selecionado assim que o usuário muda o option
+    document.getElementById('SelecVendedor').classList.remove('--has-error');
+
+    var id = jQuery(this).val();
+    // Carrega Select de horas no formulario 
+    var horasinvertido = horas.slice(0).reverse();
+    var $formHora = document.getElementById('SelecHora');
+    var i, L = $formHora.options.length - 1;
+    for (i = L; i >= 0; i--) {
+        $formHora.remove(i);
+    }
+
+    for (let index = 0; index < horasinvertido.length; index++)
+        $formHora.insertAdjacentHTML('afterbegin', '<option>' + ContatosNaAgenda(id, horasinvertido[index]) + '</option>');
+});
+
+function ContatosNaAgenda(qualVendedor, qualHora) {
+    for (let c = 0; c < contatos.length; c++) { //varre todos os contados
+        if ((qualVendedor === contatos[c].vendedor) && (dataCorrente === contatos[c].dataContato)) { //quando localiza o contato pelo numero
+            if (qualHora.replaceAll(':', '') === contatos[c].horario)
+                return qualHora + ' - Cliente:' + contatos[c].cliente;
+        }
+    }
+    return qualHora;
+}
+
+
+jQuery('#SelecHora').change(function () {
+    document.getElementById('SelecHora').classList.remove('--has-error');
+});
+
+jQuery('#SelecTipoAt').change(function () {
+    document.getElementById('SelecTipoAt').classList.remove('--has-error');
+});
+
+
+const campoFormNome = document.getElementById('NomeCliente');
+campoFormNome.addEventListener('keyup', function (ev) {
+    const input = ev.target;
+    const value = ev.target.value;
+
+    if (value.length <= 3) {
+        input.classList.add('--has-error');
+
+    } else {
+        input.classList.remove('--has-error');
+    }
+});
+
+function cadastroAtend() {
+    database.set('codCadastro', contatoMarcado);
+    window.location.href = '/cadastro.html';
 }
