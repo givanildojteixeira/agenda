@@ -27,13 +27,15 @@
 			<div class="p-3">
 				<h1><a href="index.html" class="logo">Minha Empresa <span>Painel Atendimento</span></a></h1>
 				<ul class="list-unstyled components mb-5">
-					<li class="active"> <a href="index.html"><span class="fa fa-home mr-3"></span>Início</a> </li>
-					<li> <a href="#"><span class="fa fa-briefcase mr-3"></span>Painel</a> </li>
+					<li class="active"> <a href="index.html"><span class="fa fa-home mr-3"></span>Painel</a> </li>
+					<li> <a href="cadastro.html"><span class="fa fa-briefcase mr-3"></span>Cadastro</a> </li>
 					<li> <a href="#"><span class="fa fa-sticky-note mr-3"></span>Relatórios</a> </li>
-					<li> <a href="#"><span class="fa fa-suitcase mr-3"></span>Resgate</a> </li>
-					<li> <a href="#"><span class="fa fa-cogs mr-3"></span>Ajustes</a> </li>
-					<li> <a href="#"><span class="fa fa-user mr-3"></span>Sobre</a> </li>
+					<li> <a href="#"><span class="fa fa-user mr-3"></span>Sobre</a>
+					</li>
 				</ul>
+
+
+
 				<button id="btCargaInicialDidatica">Carga Inicial</button>
 
 				<div class="">
@@ -91,7 +93,7 @@
 							</div>
 							<div>
 								<h4>Agenda do Vendedor</h4>
-								<p class="clock"></p>
+								<p class="clock">Próxima atualização em 00 segundos</p>
 							</div>
 
 						</nav>
@@ -330,6 +332,9 @@
 				</div>
 			</div>
 
+			<!-- <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left"
+				title="Tooltip on left">Tooltip on left</button> -->
+
 			<!-- Legenda e botões -->
 			<div class="col col-12">
 				<!--//colocar um div legenda para poder puxar os eventos
@@ -378,30 +383,33 @@
 						</div>
 					</div>
 
-
 					<!-- botoes -->
 					<div class="col sidenav">
 						<div class="row centro align-items-center justify-content-center">
 							<div class="col">
-								<input class="btn btn-primary btn-block" type="button" value="F8 - Insere Agenda"
-									data-toggle="tooltip" data-placement="top" title="Insere novos contatos na Agenda"
-									onclick="criacaoContato()">
+
 								<button class="btn btn-primary btn-block" id="criar-modal" data-toggle="tooltip"
-									title="Insere contato por formulario">Formulario</button>
+									title="Insere contato por formulario">Insere Agenda - Formulário</button>
+
+								<input id="atendimento-contato" class="btn btn-primary btn-block" type="button" value="Cadastro
+									Atendimento" data-toggle="tooltip" data-placement="top" onclick="cadastroAtend()">
 							</div>
 							<div class="col">
-								<input class="btn btn-primary btn-block" type="button" value="F9 - Remove Agenda"
-									data-toggle="tooltip" data-placement="top" title="Remove Contato na Agenda"
+								<input class="btn btn-primary btn-block" type="button"
+									value="F8 - Insere Agenda - Prompt" data-toggle="tooltip" data-placement="top"
+									title="Insere novos contatos na Agenda" onclick="criacaoContato()">
+
+								<input id="remove-contato" class="btn btn-primary btn-block" type="button"
+									value="F9 - Remove Agenda" data-toggle="tooltip" data-placement="top"
 									onclick="removeContato()">
-								<button type="button" class="btn btn-primary btn-block" data-toggle="tooltip"
-									data-placement="top" title="Imprime tela">Impressão</button>
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<!-- Cabeçalho do Modal -->
+			<!-- Cabeçalho do Formulário Modal -->
 			<div class="modal col-md-9" id="modal-alerta">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -414,18 +422,21 @@
 										<h3>Cadastro de Agendamentos</h3>
 									</div>
 									<label>Nome do Cliente</label>
-									<input type="text" class="form-control" id="NomeCliente"
-										placeholder="Digite o Nome do Cliente">
+									<input type="text" class="form-control field" id="NomeCliente"
+										placeholder="Digite o Nome do Cliente" onblur="valideCamposFormularioBasico()">
 									<label>Selecione o Vendedor</label>
-									<select class="form-control" id="SelecVendedor">
+									<select class="form-control field --has-error"
+										onblur="valideCamposFormularioBasico()" id="SelecVendedor">
 										<option hidden>Nome do Vendedor</option>
 									</select>
 									<label>Selecione o Horário</label>
-									<select class="form-control" id="SelecHora">
+									<select class="form-control field --has-error"
+										onblur="valideCamposFormularioBasico()" id="SelecHora">
 										<option hidden>Horário de atendimento</option>
 									</select>
 									<label>Selecione o Tipo de Atendimento</label>
-									<select class="form-control" id="SelecTipoAt">
+									<select class="form-control field --has-error"
+										onblur="valideCamposFormularioBasico()" id="SelecTipoAt">
 										<option hidden>Tipo de atendimento</option>
 									</select>
 									<!-- Rodapé do Modal -->
@@ -455,7 +466,11 @@
 			</footer>
 		</div>
 	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js">
+	</script>
 
+	<script src="https://unpkg.com/@popperjs/core@2"></script>
 	<script type="text/javascript" src="./assets/libraries/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="./assets/libraries/bootstrap/bootstrap-datetimepicker.js" charset="UTF-8">
 	</script>

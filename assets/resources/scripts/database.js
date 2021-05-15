@@ -43,6 +43,12 @@ let database = {
     },
     remove: function (key) {
         localStorage.removeItem(key);
-    }
+    },
+    getSession: function (key) {
+        return JSON.parse(sessionStorage.getItem(key));
+    },
+    setSession: function (key, value) {
+        sessionStorage.setItem(key, JSON.stringify(value));
+    },
 };
 database.get();

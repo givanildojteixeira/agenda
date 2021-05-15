@@ -34,7 +34,7 @@ Eventos
 -   [x] Evento de carregamento do documento - onload
 -   [x] Evento de movimento do mouse
 -   [x] Evento de teclado - usar charCode ou keyCode
--   [ ] Eventos de formulário - onfocus e onblur
+-   [x] Eventos de formulário - onfocus e onblur
 -   [x] Imprimir alguma propriedade do objeto event recebido como parâmetro
 -   [x] Propagação de eventos no modelo bolha (usar target e currentTarget, ou seja, disparar o evento em um elemento filho e capturar em um elemento pai)
 
@@ -80,11 +80,11 @@ Qualidade do código
 Formulário
 
 -   [ ] Validação de formulário com onsubmit usando os métodos tradicionais
--   [ ] Validação de formulário com HTML5 API
--   [ ] Customizar as mensagens nos balões de mensagem
--   [ ] Usar os atributos de validação dos inputs
--   [ ] Usar expressões regulares
--   [ ] Ler e escrever em elementos input com a propriedade value
+-   [x] Validação de formulário com HTML5 API
+-   [x] Customizar as mensagens nos balões de mensagem
+-   [x] Usar os atributos de validação dos inputs
+-   [x] Usar expressões regulares
+-   [x] Ler e escrever em elementos input com a propriedade value
 -   [x] Alterar o conteúdo de elementos div ou p com a propriedade innerHTML ou textContent
 -   [x] Manipulação de elemento de listagem, como checkbox, radio ou select
 -   [ ] Acesso aos elementos de um formulário via hierarquia (caminho) de objetos, ou seja, array forms e elements
@@ -92,14 +92,14 @@ Formulário
 PROVA ETAPA3
 jQuery
 
--   [ ] Uso de seletores CSS - id, classe e tag
+-   [x] Uso de seletores CSS - id, classe e tag
 -   [ ] Uso de seletores hierárquicos estáticos - ancestral/descendente, pai/filho, anterior/próximo
 -   [ ] Uso de seletores hierárquicos dinâmicos - parent/children/next
 -   [x] Efeitos fade ou slide
--   [ ] Especificar o tratador de algum evento via jQuery
+-   [x] Especificar o tratador de algum evento via jQuery
 -   [ ] Manipulação do CSS via função css() e addClass()/removeClass()
--   [ ] Manipulação do conteúdo de um input e div usando jQuery
--   [ ] Aplicar um plugin do jQuery (por exemplo, jQuery Mask Plugin)
+-   [x] Manipulação do conteúdo de um input e div usando jQuery
+-   [x] Aplicar um plugin do jQuery (por exemplo, jQuery Mask Plugin)
 
 Web Storage
 

@@ -13,6 +13,7 @@ Main
 /*global CarregaForm */
 
 
+
 /*
 correções necessárias de lint
 inclusao de 'use strict' para evitar problemas com o codigo nos navegadores, obrigando o programador a tratar
@@ -56,7 +57,7 @@ class Contatos {
 	};
 	fullHeight();
 	//ativa/desativa painel lateral
-	$('#sidebar').toggleClass('active');
+	// $('#sidebar').toggleClass('active');
 	$('#sidebarCollapse').on('click', function () {
 		$('#sidebar').toggleClass('active');
 	});
@@ -66,8 +67,22 @@ class Contatos {
 		$('#NomeCliente').focus();
 	});
 
+	$('.modal').on('hidden.bs.modal', function () {
+		$(this)
+			.find('input,textarea')
+			.val('')
+			.end();
+		$('#SelecVendedor').val('Nome do Vendedor');
+		$('#SelecHora').val('Horário de atendimento');
+		$('#SelecTipoAt').val('Tipo de atendimento');
+		document.getElementById('SelecTipoAt').classList.add('--has-error');
+		document.getElementById('SelecVendedor').classList.add('--has-error');
+		document.getElementById('SelecHora').classList.add('--has-error');
+	});
+
 
 })(jQuery);
+
 
 window.onload = function () {
 	//****************************************************************************** */
@@ -104,6 +119,7 @@ window.onload = function () {
 	usa setInterval para atualizar o cronometro a cada 1 segundo
 	*/
 	setInterval(AtualizarAutomaticamente, 1000);
+
 }();
 
 $(window).load(function () {
@@ -133,7 +149,7 @@ function AtualizarAutomaticamente() {
 		tempoAtualizarAutomaticamente = 60;
 		new DistribuiContatos(); //distribui os contatos criados no painel.
 	}
-	document.querySelector('.clock').textContent = 'Proxima Atualização em: ' + tempoAtualizarAutomaticamente + ' segundo';
+	document.querySelector('.clock').textContent = 'Próxima Atualização em: ' + tempoAtualizarAutomaticamente + ' segundo';
 }
 
 //****************************************************************************** */
@@ -196,7 +212,7 @@ function CargaInicialDidatica() {
 		contatos.push(new Contatos('Silvani', 'Gilberto', 7, '1800', dataCorrente));
 		contatos.push(new Contatos('Orlei', 'Roni', 6, '0800', dataCorrente));
 		contatos.push(new Contatos('Orlei', 'Elisangela', 3, '1030', dataCorrente));
-		contatos.push(new Contatos('Silvani', 'Lucas', 1, '1130', dataCorrente));
+		contatos.push(new Contatos('Silvani', 'Lucas', 1, '0930', dataCorrente));
 		database.setArray('arrayContatos', contatos);
 		window.alert('Carga Inicial Executada');
 	}
@@ -207,16 +223,3 @@ function CargaInicialDidatica() {
 		$('#sidebar').toggleClass('active');
 	}, 100); //mensagem com delay pois aguarda o prenchimento da tela
 }
-
-
-$(document).ready(function () {
-	$('.modal').on('hidden.bs.modal', function () {
-		$(this)
-			.find('input,textarea')
-			.val('')
-			.end();
-		$('#SelecVendedor').val('Nome do Vendedor');
-		$('#SelecHora').val('Horário de atendimento');
-		$('#SelecTipoAt').val('Tipo de atendimento');
-	});
-});
