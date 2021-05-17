@@ -64,7 +64,7 @@
 				</div>
 			</div>
 			<!-- Cadastro  -->
-
+			<div id='alert' class="alert alert-danger hidden"></div>
 			<form class="form-horizontal">
 				<fieldset>
 					<div class="panel panel-primary">
@@ -72,9 +72,10 @@
 						<div class="panel-body">
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-2 control-label" for="Nome">Nome <h11>*</h11></label>
+								<label class="col-md-2 control-label" for="Nome">Nome <h11>*</h11>
+								</label>
 								<div class="col-md-9">
-									<input id="NomeForm" name="INPUT" placeholder="" class="form-control input-md"
+									<input id="NomeForm" name="Cliente" placeholder="" class="form-control input-md"
 										required="" type="text"><span id="inputSuccess2Status"
 										class="sr-only">(success)</span>
 								</div>
@@ -151,7 +152,7 @@
 									<div class="input-group">
 										<span class="input-group-addon"><i
 												class="glyphicon glyphicon-envelope"></i></span>
-										<input id="prependedtext" name="E-mail" class="form-control"
+										<input id="email" name="E-mail" class="form-control"
 											placeholder="email@email.com" required="" type="text"
 											pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
 									</div>
@@ -218,8 +219,8 @@
 							<!-- Text input-->
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="ObsAtend">Atendimento <h11>*</h11></label>
-								<div class="col-md-9"><textarea id="ObsAtend" name="ObsAtend" class="form-control"
-										rows="3" required=""
+								<div class="col-md-9">
+									<textarea id="ObsAtend" name="ObsAtend" class="form-control" rows="3" required=""
 										placeholder="Descreva neste campo o seu atendimento para facilitar consultas posteriores">
 									</textarea>
 								</div>

@@ -79,7 +79,7 @@ Qualidade do código
 
 Formulário
 
--   [ ] Validação de formulário com onsubmit usando os métodos tradicionais
+-   [x] Validação de formulário com onsubmit usando os métodos tradicionais
 -   [x] Validação de formulário com HTML5 API
 -   [x] Customizar as mensagens nos balões de mensagem
 -   [x] Usar os atributos de validação dos inputs
@@ -87,7 +87,7 @@ Formulário
 -   [x] Ler e escrever em elementos input com a propriedade value
 -   [x] Alterar o conteúdo de elementos div ou p com a propriedade innerHTML ou textContent
 -   [x] Manipulação de elemento de listagem, como checkbox, radio ou select
--   [ ] Acesso aos elementos de um formulário via hierarquia (caminho) de objetos, ou seja, array forms e elements
+-   [x] Acesso aos elementos de um formulário via hierarquia (caminho) de objetos, ou seja, array forms e elements
 
 PROVA ETAPA3
 jQuery
@@ -97,7 +97,7 @@ jQuery
 -   [ ] Uso de seletores hierárquicos dinâmicos - parent/children/next
 -   [x] Efeitos fade ou slide
 -   [x] Especificar o tratador de algum evento via jQuery
--   [ ] Manipulação do CSS via função css() e addClass()/removeClass()
+-   [x] Manipulação do CSS via função css() e addClass()/removeClass()
 -   [x] Manipulação do conteúdo de um input e div usando jQuery
 -   [x] Aplicar um plugin do jQuery (por exemplo, jQuery Mask Plugin)
 
@@ -109,4 +109,4 @@ Web Storage
 
 Ajax com Backend
 
--   [ ] Implementação funcional (basta fazer funcionar uma requisição) do backend em ExpressJS na plataforma Node e requisições AJAX.
+-   [x] Implementação funcional (basta fazer funcionar uma requisição) do backend em ExpressJS na plataforma Node e requisições AJAX.

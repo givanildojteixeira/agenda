@@ -234,7 +234,6 @@ let myFunction = (x) => {
 let myFunctionClique = (x) => {
     document.getElementById('resp').innerHTML = '';
     let r = leContatos(parseInt(x.innerHTML));
-    // alert(r);
     if (r !== '') {
         document.getElementById('resp').innerHTML = 'Você selecionou o contato: <strong>' +
             r +
